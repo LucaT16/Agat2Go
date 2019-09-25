@@ -1,5 +1,7 @@
 {
   "name": "Agat2Go",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
