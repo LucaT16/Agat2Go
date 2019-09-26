@@ -3,8 +3,20 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: "AIzaSyDy4ZDN8j3Fc2iWS6GONoAIKeBAclw2ouk",
+    authDomain: "agat2go.firebaseapp.com",
+    databaseURL: "https://agat2go.firebaseio.com",
+    projectId: "agat2go",
+    storageBucket: "agat2go.appspot.com",
+    messagingSenderId: "655141452917",
+    appId: "1:655141452917:web:f8ae3551a4f37860e90c3c",
+    measurementId: "G-EL3LYPNE9L"
+  }
 };
+
+
 
 /*
  * For easier debugging in development mode, you can import the following file
