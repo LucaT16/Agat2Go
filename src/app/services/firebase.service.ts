@@ -16,7 +16,7 @@ export class FirebaseService {
     public afAuth: AngularFireAuth
   ){}
 
-  getTasks(){
+  getProducts(){
     return new Promise<any>((resolve, reject) => {
       this.afAuth.user.subscribe(currentUser => {
         if(currentUser){
