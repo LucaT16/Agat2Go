@@ -18,20 +18,18 @@ export class FirebaseService {
 
   getProducts(){
     return new Promise<any>((resolve, reject) => {
-      this.afAuth.user.subscribe(currentUser => {
-        if(currentUser){
-          this.snapshotChangesSubscription = this.afs.collection('people').doc(currentUser.uid).collection('tasks').snapshotChanges();
-          resolve(this.snapshotChangesSubscription);
-        }
+      this.afs.collection('/coffee').snapshotChanges()
+      .subscribe(snapshots => {
+        resolve(snapshots)
       })
     })
   }
 
-  getTask(taskId){
+  getProduct(prodId){
     return new Promise<any>((resolve, reject) => {
       this.afAuth.user.subscribe(currentUser => {
         if(currentUser){
-          this.snapshotChangesSubscription = this.afs.doc<any>('people/' + currentUser.uid + '/tasks/' + taskId).valueChanges()
+          this.snapshotChangesSubscription = this.afs.doc<any>('/coffee/' + prodId).valueChanges()
           .subscribe(snapshots => {
             resolve(snapshots);
           }, err => {
