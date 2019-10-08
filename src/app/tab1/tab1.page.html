@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let item of items" class="welcome-card" (click)="test(item)">
+  <ion-card *ngFor="let item of items" class="welcome-card" (click)="toDetailPage(item)">
     <img src="/assets/espresso.jpeg" alt="" />
     <ion-card-header>
       <ion-card-title>{{item.payload.doc.data().name}}</ion-card-title>
