@@ -21,12 +21,7 @@ export class DetailPage implements OnInit {
   item = new Item();
   prodId: String;
   back = "Zurück";
-
-  public form = [
-    { val: 'Pepperoni', isChecked: true },
-    { val: 'Sausage', isChecked: false },
-    { val: 'Mushroom', isChecked: false }
-  ];
+  extras: Array<any>;
 
   ngOnInit() {
     this.data.currentMessage.subscribe(prodId => this.prodId = prodId)
@@ -38,6 +33,10 @@ export class DetailPage implements OnInit {
     .then(result => {
       this.item = result.payload.data();
       console.log(this.item.name)
+    })
+    this.firebaseService.getExtras()
+    .then(result => {
+      this.extras = result;
     })
   }
 
