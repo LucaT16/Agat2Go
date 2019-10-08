@@ -1,40 +1,30 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-        Home
+      Home
     </ion-title>
     <ion-buttons slot="primary">
-        <ion-icon slot="icon-only" name="cart" (click)="toCart()"></ion-icon>
+      <ion-icon slot="icon-only" name="cart" (click)="toCart()"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <!-- <ion-card *ngFor="let item of items" class="welcome-card" (click)="test(item)">
-    <img src="/assets/espresso.jpeg" alt="" />
-    <ion-card-header>
-      <ion-card-title>{{item.payload.doc.data().name}}</ion-card-title>
-    </ion-card-header>
-  </ion-card> -->
-
-
 
   <ion-list inset="true">
-      <ion-list-header>
-        <ion-label>Favoriten</ion-label>
-      </ion-list-header>
-      <ion-item >
-        <ion-icon slot="end" color="medium" name="add-circle-outline"></ion-icon>
-      
-        <ion-label>
-            <br>
-            <h2>Neuen Favorit festlegen</h2>
-            <br>
-          </ion-label>
-      </ion-item>
-    </ion-list>
+    <ion-list-header>
+      <ion-label>Favoriten</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-icon slot="end" color="medium" name="add-circle-outline"></ion-icon>
 
-
+      <ion-label>
+        <br>
+        <h2>Neuen Favorit festlegen</h2>
+        <br>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 
   <ion-list inset="true">
     <ion-list-header>
@@ -43,14 +33,14 @@
     <ion-item *ngFor="let item of items" (click)="toDetailPage(item)">
       <ion-icon slot="end" color="medium" name="arrow-forward"></ion-icon>
       <ion-avatar slot="start">
-        <img src="./assets/espresso.jpeg">
+        <img src="./assets/{{item.payload.doc.data().name}}.jpg">
       </ion-avatar>
       <ion-label>
-          <br>
-          <h2>{{item.payload.doc.data().name}}</h2>
-          <h4>{{item.payload.doc.data().price}}0 €</h4>
-          <br>
-        </ion-label>
+        <br>
+        <h2>{{item.payload.doc.data().name}}</h2>
+        <h4>{{item.payload.doc.data().price}}0 €</h4>
+        <br>
+      </ion-label>
 
     </ion-item>
   </ion-list>
