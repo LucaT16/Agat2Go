@@ -34,6 +34,15 @@ export class FirebaseService {
     })
   }
 
+  getExtras(){
+    return new Promise<any>((resolve, reject) => {
+      this.afs.collection('/Extras').snapshotChanges()
+      .subscribe(snapshots => {
+        resolve(snapshots)
+      })
+    })
+  }
+
   unsubscribeOnLogOut(){
     //remember to unsubscribe from the snapshotChanges
     this.snapshotChangesSubscription.unsubscribe();

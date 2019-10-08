@@ -18,44 +18,19 @@
       <ion-card-title>{{item.name}}</ion-card-title>
     </ion-card-header>
   </ion-card>
-    
-
+      
 
   <ion-list>
       <ion-list-header>
           <ion-label>Extras</ion-label>
         </ion-list-header>
-      <ion-item >
+      <ion-item *ngFor="let item of extras" >
         <ion-label>
-          <h2>Hafermilch</h2>
-          <h3>0,40€</h3>
+          <h2>{{item.payload.doc.data().name}}</h2>
+          <h3>{{item.payload.doc.data().price}}0 €</h3>
         </ion-label>
         <ion-checkbox slot="end"></ion-checkbox>
       </ion-item>
-
-      <ion-item >
-          <ion-label>
-            <h2>Kokosmilch</h2>
-            <h3>0,40€</h3>
-          </ion-label>
-          <ion-checkbox slot="end"></ion-checkbox>
-        </ion-item>
-
-        <ion-item >
-            <ion-label>
-              <h2>Mandelmilch</h2>
-              <h3>0,60€</h3>
-            </ion-label>
-            <ion-checkbox slot="end"></ion-checkbox>
-          </ion-item>
-
-          <ion-item >
-              <ion-label>
-                <h2>Schlagsahne</h2>
-                <h3>0,50€</h3>
-              </ion-label>
-              <ion-checkbox slot="end"></ion-checkbox>
-            </ion-item>
     </ion-list>
       
       <ion-item>
@@ -65,24 +40,30 @@
 
       <br>
       <br>
-      
-      
 
-
-       
+      <ion-row>
+          <ion-col offset-4> </ion-col>
+          <ion-col offset-4> </ion-col>
+          <ion-col>
+              <h3>Gesamtpreis:</h3>
+          </ion-col>
+          <ion-col>
+              <h3> 200€</h3>
+          </ion-col>
+       </ion-row>
 
           <ion-row>
-              <ion-col offset-4>
-                  <section>
-                      <ion-button size = "large" >Zum Warenkorb hinzufügen</ion-button>
-                    </section>
-              </ion-col>
               <ion-col>
                   <ion-fab horizontal="center" vertical="center">
                       <ion-fab-button color="warning">
                         <ion-icon name="md-heart"></ion-icon>
                       </ion-fab-button>
                     </ion-fab>
+              </ion-col>
+              <ion-col offset-4>
+                  <section>
+                      <ion-button size = "large" >Zum Warenkorb hinzufügen</ion-button>
+                    </section>
               </ion-col>
             </ion-row>
 
