@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
+import { ModalController } from '@ionic/angular';
+import { CartPage } from '../cart/cart.page';
 
 @Component({
   selector: 'app-tab1',
@@ -16,7 +18,8 @@ export class Tab1Page implements OnInit {
   constructor(
     public firebaseService: FirebaseService,
     private router: Router,
-    private data: DataService
+    private data: DataService,
+    public modalController: ModalController
     ) { }
 
 
@@ -31,7 +34,14 @@ export class Tab1Page implements OnInit {
     this.prodId = item.payload.doc.data().id;
     this.data.changeMessage(this.prodId);
     this.router.navigate(["/detail"]);
-    }
+  }
+
+  async toCart() {
+    const modal = await this.modalController.create({
+      component: CartPage
+    });
+    return await modal.present();
+  }
 
   test(item){
     var name = item.payload.doc.data().name;
