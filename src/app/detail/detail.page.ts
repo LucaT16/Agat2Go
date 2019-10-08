@@ -32,6 +32,10 @@ export class DetailPage implements OnInit {
     })
   }
 
+  segmentChanged(ev: any) {
+    console.log('Segment changed', ev);
+  }
+
 }
 
 class Item {
@@ -41,3 +45,7 @@ class Item {
 
   constructor() {}
 };
+
+
+
+
