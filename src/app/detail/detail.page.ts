@@ -12,15 +12,21 @@ import { DataService } from '../services/data.service';
 
 export class DetailPage implements OnInit {
 
-  item = new Item();
-  prodId: String;
-  back = "Zurück";
-
   constructor(
     public firebaseService: FirebaseService,
     private router: Router,
     private data: DataService
     ) {}
+
+  item = new Item();
+  prodId: String;
+  back = "Zurück";
+
+  public form = [
+    { val: 'Pepperoni', isChecked: true },
+    { val: 'Sausage', isChecked: false },
+    { val: 'Mushroom', isChecked: false }
+  ];
 
   ngOnInit() {
     this.data.currentMessage.subscribe(prodId => this.prodId = prodId)
@@ -35,10 +41,6 @@ export class DetailPage implements OnInit {
     })
   }
 
-  segmentChanged(ev: any) {
-    console.log('Segment changed', ev);
-  }
-
 }
 
 class Item {
@@ -48,7 +50,3 @@ class Item {
 
   constructor() {}
 };
-
-
-
-
