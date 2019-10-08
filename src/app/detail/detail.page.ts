@@ -31,9 +31,13 @@ export class DetailPage implements OnInit {
   ngOnInit() {
     this.data.currentMessage.subscribe(prodId => this.prodId = prodId)
     console.log(this.prodId)
+    if(this.prodId == "no id"){
+      this.router.navigate(["/tabs/tab1"]);
+    }
     this.firebaseService.getProduct(this.prodId)
     .then(result => {
       this.item = result.payload.data();
+      this.picUrl = "/assets/"+ this.item.name +".jpeg"
       console.log(this.item.name)
     })
   }
