@@ -14,6 +14,7 @@ export class DetailPage implements OnInit {
 
   item = new Item();
   prodId: String;
+  back = "Zurück";
 
   constructor(
     public firebaseService: FirebaseService,
