@@ -27,17 +27,11 @@ export class FirebaseService {
 
   getProduct(prodId){
     return new Promise<any>((resolve, reject) => {
-      this.afAuth.user.subscribe(currentUser => {
-        if(currentUser){
-          this.snapshotChangesSubscription = this.afs.doc<any>('/coffee/' + prodId).valueChanges()
-          .subscribe(snapshots => {
-            resolve(snapshots);
-          }, err => {
-            reject(err)
-          })
-        }
+      this.afs.doc('/coffee/' + prodId).snapshotChanges()
+      .subscribe(snapshots => {
+        resolve(snapshots)
       })
-    });
+    })
   }
 
   unsubscribeOnLogOut(){

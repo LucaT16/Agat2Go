@@ -12,6 +12,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { DataService } from './services/data.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,7 +29,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AngularFirestoreModule,
-    AngularFireAuth
+    AngularFireAuth,
+    DataService
   ],
   bootstrap: [AppComponent]
 })
