@@ -6,66 +6,66 @@
     </ion-buttons>
     <ion-title>{{item.name}}</ion-title>
     <ion-buttons slot="primary">
-        <ion-icon slot="icon-only" name="cart" (click)="toCart()"></ion-icon>
+      <ion-icon slot="icon-only" name="cart" (click)="toCart()"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-card>
-      <img src="/assets/{{item.name}}.jpg" alt="" />
+    <img src="/assets/{{item.name}}.jpg" alt="" />
     <ion-card-header>
       <ion-card-title>{{item.name}}</ion-card-title>
     </ion-card-header>
   </ion-card>
-      
+
 
   <ion-list>
-      <ion-list-header>
-          <ion-label>Extras</ion-label>
-        </ion-list-header>
-      <ion-item *ngFor="let item of extras" >
-        <ion-label>
-          <h2>{{item.payload.doc.data().name}}</h2>
-          <h3>{{item.payload.doc.data().price}}0 €</h3>
-        </ion-label>
-        <ion-checkbox slot="end"></ion-checkbox>
-      </ion-item>
-    </ion-list>
-      
-      <ion-item>
-        <ion-label>to Go?</ion-label>
-        <ion-toggle slot="end" checked></ion-toggle>
-      </ion-item>
+    <ion-list-header>
+      <ion-label>Extras</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let item of extras">
+      <ion-label>
+        <h2>{{item.payload.doc.data().name}}</h2>
+        <h3>{{item.payload.doc.data().price}}0 €</h3>
+      </ion-label>
+      <ion-checkbox slot="end"></ion-checkbox>
+    </ion-item>
+  </ion-list>
 
-      <br>
-      <br>
+  <ion-item>
+    <ion-label>To Go?</ion-label>
+    <ion-toggle slot="end" checked></ion-toggle>
+  </ion-item>
 
-      <ion-row>
-          <ion-col offset-4> </ion-col>
-          <ion-col offset-4> </ion-col>
-          <ion-col>
-              <h3>Gesamtpreis:</h3>
-          </ion-col>
-          <ion-col>
-              <h3> 200€</h3>
-          </ion-col>
-       </ion-row>
+  <br>
+  <br>
 
-          <ion-row>
-              <ion-col>
-                  <ion-fab horizontal="center" vertical="center">
-                      <ion-fab-button color="warning">
-                        <ion-icon name="md-heart"></ion-icon>
-                      </ion-fab-button>
-                    </ion-fab>
-              </ion-col>
-              <ion-col offset-4>
-                  <section>
-                      <ion-button size = "large" >Zum Warenkorb hinzufügen</ion-button>
-                    </section>
-              </ion-col>
-            </ion-row>
+  <ion-row>
+    <ion-col offset-4> </ion-col>
+    <ion-col offset-4> </ion-col>
+    <ion-col>
+      <h3>Gesamtpreis:</h3>
+    </ion-col>
+    <ion-col>
+      <h3> 200€</h3>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-fab horizontal="center" vertical="center">
+        <ion-fab-button color="warning">
+          <ion-icon name="md-heart"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    </ion-col>
+    <ion-col offset-4>
+      <section>
+        <ion-button size="large">Zum Warenkorb hinzufügen</ion-button>
+      </section>
+    </ion-col>
+  </ion-row>
 
 
 </ion-content>
