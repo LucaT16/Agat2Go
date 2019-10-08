@@ -7,20 +7,28 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let item of items" class="welcome-card" (click)="test(item)">
+  <!-- <ion-card *ngFor="let item of items" class="welcome-card" (click)="test(item)">
     <img src="/assets/espresso.jpeg" alt="" />
     <ion-card-header>
       <ion-card-title>{{item.payload.doc.data().name}}</ion-card-title>
     </ion-card-header>
-  </ion-card>
+  </ion-card> -->
 
-  <ion-list>
+  <ion-list inset="true">
     <ion-list-header>
       <ion-label>Produkte</ion-label>
     </ion-list-header>
     <ion-item *ngFor="let item of items" (click)="test(item)">
-      <ion-icon slot="start" color="medium" name="cafe"></ion-icon>
-      <ion-label>{{item.payload.doc.data().name}}</ion-label>
+      <ion-icon slot="end" color="medium" name="arrow-forward"></ion-icon>
+      <ion-avatar slot="start">
+        <img src="./assets/espresso.jpeg">
+      </ion-avatar>
+      <ion-label>
+          <br>
+          <h2>{{item.payload.doc.data().name}}</h2>
+          <br>
+        </ion-label>
+        
     </ion-item>
   </ion-list>
 </ion-content>
