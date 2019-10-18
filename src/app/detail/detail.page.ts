@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
-import { VirtualTimeScheduler } from 'rxjs';
+import { NavController } from '@ionic/angular';
 
 
 @Component({
@@ -16,12 +16,13 @@ export class DetailPage implements OnInit {
   constructor(
     public firebaseService: FirebaseService,
     private router: Router,
-    private data: DataService
+    private data: DataService,
+    private navController: NavController
     ) {}
 
   item = new Item();
   prodId: String;
-  back = "Zurück";
+  backBtn = "Zurück";
   extras: Array<Extra>;
   addedExtras: Array<Extra> = []; 
   totalprice = 0;
@@ -73,7 +74,6 @@ export class DetailPage implements OnInit {
 
   addToFavorite() {
     this.firebaseService.createFav(this.item, this.addedExtras, +this.totalprice.toFixed(2))
-    alert("Favorit hinzugefügt!")
    }
 }
 
