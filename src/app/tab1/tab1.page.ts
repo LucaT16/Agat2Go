@@ -3,7 +3,7 @@ import { FirebaseService } from '../services/firebase.service';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { ModalController } from '@ionic/angular';
-import { CartPage } from '../cart/cart.page';
+import { CartModalPage } from '../cart-modal/cart-modal.page';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -32,7 +32,7 @@ export class Tab1Page implements OnInit {
         this.items = result;
       })
     if(this.authService.afAuth.auth.currentUser == null) {
-      this.router.navigate(["/login"])
+      //this.router.navigate(["/login"])
     } else {
       this.uid = this.authService.afAuth.auth.currentUser.uid
     }
@@ -46,7 +46,7 @@ export class Tab1Page implements OnInit {
 
   async toCart() {
     const modal = await this.modalController.create({
-      component: CartPage
+      component: CartModalPage
     });
     return await modal.present();
   }
