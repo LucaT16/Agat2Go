@@ -16,7 +16,7 @@ import { CartModalPage } from '../cart-modal/cart-modal.page';
     FormsModule,
     TabsPageRoutingModule,
   ],
-  declarations: [TabsPage, CartModalPage],
-  entryComponents: [CartModalPage]
+  declarations: [TabsPage]
+  
 })
 export class TabsPageModule {}
