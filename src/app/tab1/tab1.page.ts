@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { ModalController } from '@ionic/angular';
 import { CartPage } from '../cart/cart.page';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-tab1',
@@ -13,21 +14,29 @@ import { CartPage } from '../cart/cart.page';
 export class Tab1Page implements OnInit {
 
   items: Array<any>;
-  prodId:string;
+  prodId: string;
+  uid: String;
 
   constructor(
     public firebaseService: FirebaseService,
     private router: Router,
     private data: DataService,
-    public modalController: ModalController
-    ) { }
+    public modalController: ModalController,
+    private authService: AuthService
+  ) { }
 
 
- ngOnInit() {
-   this.firebaseService.getProducts()
-    .then(result => {
-      this.items = result;
-    })
+  ngOnInit() {
+    this.firebaseService.getProducts()
+      .then(result => {
+        this.items = result;
+      })
+    if(this.authService.afAuth.auth.currentUser == null) {
+      this.router.navigate(["/login"])
+    } else {
+      this.uid = this.authService.afAuth.auth.currentUser.uid
+    }
+    this.checkCart()
   }
 
   toDetailPage(item) {
@@ -43,10 +52,13 @@ export class Tab1Page implements OnInit {
     return await modal.present();
   }
 
-  test(item){
-    var name = item.payload.doc.data().name;
-    var price = item.payload.doc.data().price;
-    var id = item.payload.doc.data().id;
-    alert(name + ' ' + price + ' ' + id);
+  checkCart(){
+    this.firebaseService.checkExistingCart()
+    .then(result => {
+      console.log(result.payload.data())
+      if (result.payload.data() == null) {
+        //this.firebaseService.createCart()
+      }
+    })
   }
 }

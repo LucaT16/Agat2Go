@@ -44,6 +44,7 @@ export class LoginPage implements OnInit {
   }
 
   tryLogin(value){
+    console.log(value)
     this.authService.doLogin(value)
     .then(res => {
       this.router.navigate(['/tabs']);

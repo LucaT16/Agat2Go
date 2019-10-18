@@ -29,7 +29,7 @@
         <h2>{{item.payload.doc.data().name}}</h2>
         <h3>{{item.payload.doc.data().price}}0 €</h3>
       </ion-label>
-      <ion-checkbox slot="end"></ion-checkbox>
+      <ion-checkbox slot="end" (click)="addExtra(item.payload.doc.data())"></ion-checkbox>
     </ion-item>
   </ion-list>
 
@@ -48,7 +48,7 @@
       <h3>Gesamtpreis:</h3>
     </ion-col>
     <ion-col>
-      <h3> 200€</h3>
+      <h3>{{totalprice}}</h3>
     </ion-col>
   </ion-row>
 
@@ -62,7 +62,7 @@
     </ion-col>
     <ion-col offset-4>
       <section>
-        <ion-button size="large">Zum Warenkorb hinzufügen</ion-button>
+        <ion-button size="large" (click)="addToCart()">Zum Warenkorb hinzufügen</ion-button>
       </section>
     </ion-col>
   </ion-row>

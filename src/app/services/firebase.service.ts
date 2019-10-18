@@ -4,6 +4,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/storage';
 import { AngularFireAuth } from '@angular/fire/auth';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -70,13 +71,13 @@ export class FirebaseService {
     })
   }
 
-  createTask(value){
+  createCart(coffee, extras){
     return new Promise<any>((resolve, reject) => {
       let currentUser = firebase.auth().currentUser;
-      this.afs.collection('people').doc(currentUser.uid).collection('tasks').add({
-        title: value.title,
-        description: value.description,
-        image: value.image
+      this.afs.collection('user').doc(currentUser.uid).collection('carts').add({
+        name: coffee.name,
+        price: coffee.price,
+        extra: extras
       })
       .then(
         res => resolve(res),
@@ -84,5 +85,16 @@ export class FirebaseService {
       )
     })
   }
+
+  checkExistingCart(){
+    return new Promise<any>((resolve, reject) => {
+      let currentUser = firebase.auth().currentUser;
+      this.afs.collection('user').doc(currentUser.uid).snapshotChanges()
+      .subscribe(snapshots => {
+        resolve(snapshots)
+      })
+    })
+  } 
+  
 
 }
