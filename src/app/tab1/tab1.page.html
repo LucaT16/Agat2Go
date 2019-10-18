@@ -18,10 +18,19 @@
       <ion-icon slot="end" color="medium" name="add-circle-outline"></ion-icon>
 
       <ion-label>
-        <br>
         <h2>Neuen Favorit festlegen</h2>
-        <br>
       </ion-label>
+    </ion-item>
+    <ion-item *ngFor="let item of favs">
+      <ion-icon slot="end" color="medium" name="arrow-forward"></ion-icon>
+      <ion-label>
+        <h2>{{item.payload.doc.data().name}}</h2>
+        <h4>{{item.payload.doc.data().extra[0].name}}</h4>
+        <ion-label slot="end">
+        <h4>{{item.payload.doc.data().totalprice.toFixed(2)}} €</h4>
+        </ion-label>
+      </ion-label>
+
     </ion-item>
   </ion-list>
 

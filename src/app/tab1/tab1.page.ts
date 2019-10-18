@@ -14,6 +14,7 @@ import { AuthService } from '../services/auth.service';
 export class Tab1Page implements OnInit {
 
   items: Array<any>;
+  favs: Array<any>;
   prodId: string;
   uid: String;
 
@@ -36,6 +37,18 @@ export class Tab1Page implements OnInit {
     } else {
       this.uid = this.authService.afAuth.auth.currentUser.uid
     }
+    this.firebaseService.getFavs()
+    .then(result => {
+      this.favs = result;
+    })
+  }
+
+  ionViewWillEnter() {
+    this.firebaseService.getFavs()
+    .then(result => {
+      this.favs = result;
+      console.log(this.favs[0].payload.doc.data().extra[0].name)
+    })
   }
 
   toDetailPage(item) {

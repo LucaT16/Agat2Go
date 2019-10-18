@@ -43,4 +43,8 @@ export class AuthService {
       });
     })
   }
+
+  userDetails(){
+    return firebase.auth().currentUser;
+  }
 }
