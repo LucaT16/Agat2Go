@@ -24,7 +24,7 @@ export class DetailPage implements OnInit {
   back = "Zurück";
   extras: Array<Extra>;
   addedExtras: Array<Extra> = []; 
-  totalprice = this.item.price;
+  totalprice = 0;
 
 
   ngOnInit() {
@@ -35,6 +35,7 @@ export class DetailPage implements OnInit {
     this.firebaseService.getProduct(this.prodId)
     .then(result => {
       this.item = result.payload.data();
+      this.totalprice = this.item.price;
     })
     this.firebaseService.getExtras()
     .then(result => {
@@ -59,7 +60,6 @@ export class DetailPage implements OnInit {
     if(extraExists){
       this.addedExtras.splice(count, 1);
       this.totalprice -= +item.price
-
     } else {
       this.addedExtras.push(item)
       this.totalprice += +item.price
@@ -69,13 +69,11 @@ export class DetailPage implements OnInit {
   addToCart() {
    this.addedExtras.forEach(element => {
      console.log(element);
-     this.totalprice = +this.totalprice + +element.price;
-     console.log(this.totalprice)
    });
-   this.firebaseService.createCart(this.item, this.addedExtras)
+   this.firebaseService.createCart(this.item, this.addedExtras, +this.totalprice.toFixed(2))
+   this.router.navigate(["/tabs/tab1"])
 
   }
-
 }
 
 class Item {

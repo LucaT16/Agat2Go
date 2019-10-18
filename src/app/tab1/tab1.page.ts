@@ -36,7 +36,6 @@ export class Tab1Page implements OnInit {
     } else {
       this.uid = this.authService.afAuth.auth.currentUser.uid
     }
-    this.checkCart()
   }
 
   toDetailPage(item) {
@@ -50,15 +49,5 @@ export class Tab1Page implements OnInit {
       component: CartPage
     });
     return await modal.present();
-  }
-
-  checkCart(){
-    this.firebaseService.checkExistingCart()
-    .then(result => {
-      console.log(result.payload.data())
-      if (result.payload.data() == null) {
-        //this.firebaseService.createCart()
-      }
-    })
   }
 }

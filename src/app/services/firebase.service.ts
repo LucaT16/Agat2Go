@@ -71,12 +71,13 @@ export class FirebaseService {
     })
   }
 
-  createCart(coffee, extras){
+  createCart(coffee, extras, totalprice){
     return new Promise<any>((resolve, reject) => {
       let currentUser = firebase.auth().currentUser;
       this.afs.collection('user').doc(currentUser.uid).collection('carts').add({
         name: coffee.name,
         price: coffee.price,
+        totalprice: totalprice,
         extra: extras
       })
       .then(
