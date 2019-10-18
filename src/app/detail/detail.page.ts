@@ -67,13 +67,14 @@ export class DetailPage implements OnInit {
   }
 
   addToCart() {
-   this.addedExtras.forEach(element => {
-     console.log(element);
-   });
    this.firebaseService.createCart(this.item, this.addedExtras, +this.totalprice.toFixed(2))
    this.router.navigate(["/tabs/tab1"])
-
   }
+
+  addToFavorite() {
+    this.firebaseService.createFav(this.item, this.addedExtras, +this.totalprice.toFixed(2))
+    alert("Favorit hinzugefügt!")
+   }
 }
 
 class Item {

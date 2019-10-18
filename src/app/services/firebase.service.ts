@@ -44,6 +44,16 @@ export class FirebaseService {
     })
   }
 
+  getFavs(){
+    return new Promise<any>((resolve, reject) => {
+      let currentUser = firebase.auth().currentUser;
+      this.afs.collection('user').doc(currentUser.uid).collection('favs').snapshotChanges()
+      .subscribe(snapshots => {
+        resolve(snapshots)
+      })
+    })
+  }
+
   unsubscribeOnLogOut(){
     //remember to unsubscribe from the snapshotChanges
     this.snapshotChangesSubscription.unsubscribe();
@@ -75,6 +85,22 @@ export class FirebaseService {
     return new Promise<any>((resolve, reject) => {
       let currentUser = firebase.auth().currentUser;
       this.afs.collection('user').doc(currentUser.uid).collection('carts').add({
+        name: coffee.name,
+        price: coffee.price,
+        totalprice: totalprice,
+        extra: extras
+      })
+      .then(
+        res => resolve(res),
+        err => reject(err)
+      )
+    })
+  }
+
+  createFav(coffee, extras, totalprice){
+    return new Promise<any>((resolve, reject) => {
+      let currentUser = firebase.auth().currentUser;
+      this.afs.collection('user').doc(currentUser.uid).collection('favs').add({
         name: coffee.name,
         price: coffee.price,
         totalprice: totalprice,
