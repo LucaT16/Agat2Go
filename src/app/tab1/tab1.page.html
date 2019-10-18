@@ -3,14 +3,13 @@
     <ion-title>
       Home
     </ion-title>
-    <ion-buttons slot="primary">
-      <ion-icon slot="icon-only" name="cart" (click)="toCart()"></ion-icon>
+    <ion-buttons (click)="toCart()" slot="primary">
+      <ion-icon slot="icon-only" name="cart" ></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
   <ion-list inset="true">
     <ion-list-header>
       <ion-label>Favoriten</ion-label>
