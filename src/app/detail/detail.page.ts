@@ -21,7 +21,6 @@ export class DetailPage implements OnInit {
     private router: Router,
     public modalController: ModalController,
     public alertController: AlertController,
-    private data: DataService
     private data: DataService,
     private navController: NavController
     ) {}
