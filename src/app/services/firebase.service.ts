@@ -54,6 +54,16 @@ export class FirebaseService {
     })
   }
 
+  getCart(){
+    return new Promise<any>((resolve, reject) => {
+      let currentUser = firebase.auth().currentUser;
+      this.afs.collection('user').doc(currentUser.uid).collection('carts').snapshotChanges()
+      .subscribe(snapshots => {
+        resolve(snapshots)
+      })
+    })
+  }
+
   unsubscribeOnLogOut(){
     //remember to unsubscribe from the snapshotChanges
     this.snapshotChangesSubscription.unsubscribe();
@@ -112,14 +122,17 @@ export class FirebaseService {
       )
     })
   }
-
-  checkExistingCart(){
+  createOrder(items) {
     return new Promise<any>((resolve, reject) => {
       let currentUser = firebase.auth().currentUser;
-      this.afs.collection('user').doc(currentUser.uid).snapshotChanges()
-      .subscribe(snapshots => {
-        resolve(snapshots)
+      this.afs.collection('order').add({
+        products: items,
+        user: currentUser.uid
       })
+      .then(
+        res => resolve(res),
+        err => reject(err)
+      )
     })
   } 
   
