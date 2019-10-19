@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { VirtualTimeScheduler } from 'rxjs';
 import { CartModalPage } from '../cart-modal/cart-modal.page';
+import { NavController } from '@ionic/angular';
 
 
 @Component({
@@ -21,11 +22,13 @@ export class DetailPage implements OnInit {
     public modalController: ModalController,
     public alertController: AlertController,
     private data: DataService
+    private data: DataService,
+    private navController: NavController
     ) {}
 
   item = new Item();
   prodId: String;
-  back = "Zurück";
+  backBtn = "Zurück";
   extras: Array<Extra>;
   addedExtras: Array<Extra> = []; 
   totalprice = 0;

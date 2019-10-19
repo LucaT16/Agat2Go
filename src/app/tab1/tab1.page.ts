@@ -51,6 +51,13 @@ export class Tab1Page implements OnInit {
     })
   }
 
+  ionViewDidEnter() {
+    this.firebaseService.getFavs()
+    .then(result => {
+      this.favs = result;
+    })
+  }
+
   toDetailPage(item) {
     this.prodId = item.payload.doc.data().id;
     this.data.changeMessage(this.prodId);
