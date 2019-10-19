@@ -1,9 +1,10 @@
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { VirtualTimeScheduler } from 'rxjs';
+import { CartModalPage } from '../cart-modal/cart-modal.page';
 
 
 @Component({
@@ -17,6 +18,8 @@ export class DetailPage implements OnInit {
   constructor(
     public firebaseService: FirebaseService,
     private router: Router,
+    public modalController: ModalController,
+    public alertController: AlertController,
     private data: DataService
     ) {}
 
@@ -42,6 +45,24 @@ export class DetailPage implements OnInit {
     .then(result => {
       this.extras = result;
     })
+  }
+
+  async favoriteAlert() {
+    const alert = await this.alertController.create({
+      header: 'Glückwunsch!',
+     // subHeader: 'Subtitle',
+      message: 'Sie haben einen neuen Favoriten hinzugefügt.',
+      buttons: ['Alles klar']
+    });
+
+    await alert.present();
+  }
+
+  async toCart() {
+    const modal = await this.modalController.create({
+      component: CartModalPage
+    });
+    return await modal.present();
   }
 
   addExtra(item) {
@@ -74,7 +95,8 @@ export class DetailPage implements OnInit {
 
   addToFavorite() {
     this.firebaseService.createFav(this.item, this.addedExtras, +this.totalprice.toFixed(2))
-    alert("Favorit hinzugefügt!")
+   // alert("Favorit hinzugefügt!")
+    this.favoriteAlert();
    }
 }
 
