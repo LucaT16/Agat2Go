@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { ProfileService } from 'src/app/services/profile.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { UserProfile } from 'src/app/models/user';
 
 @Component({
@@ -11,18 +11,19 @@ import { UserProfile } from 'src/app/models/user';
   styleUrls: ['./profile.page.scss']
 })
 export class ProfilePage implements OnInit {
-  public userProfile: UserProfile;
+  public user: UserProfile;
   constructor(
     private authService: AuthService,
     private router: Router,
     private profileService: ProfileService,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private modalController: ModalController,
   ) {}
 
   ngOnInit() {
     this.profileService.getUserProfile().then(profile$ => {
       profile$.subscribe(userProfile => {
-        this.userProfile = userProfile;
+        this.user = userProfile;
       });
     });
   }
@@ -34,13 +35,13 @@ export class ProfilePage implements OnInit {
 
   async updateName(): Promise<void> {
     const alert = await this.alertCtrl.create({
-      subHeader: 'Your name',
+      subHeader: 'Dein Name',
       inputs: [
         {
           type: 'text',
-          name: 'fullName',
-          placeholder: 'Your full name',
-          value: this.userProfile.fullName
+          name: 'name',
+          placeholder: 'Dein Name',
+          value: this.user.name
         }
       ],
       buttons: [
@@ -48,7 +49,7 @@ export class ProfilePage implements OnInit {
         {
           text: 'Save',
           handler: data => {
-            this.profileService.updateName(data.fullName);
+            this.profileService.updateName(data.name);
           }
         }
       ]
@@ -59,8 +60,8 @@ export class ProfilePage implements OnInit {
   async updateEmail(): Promise<void> {
     const alert = await this.alertCtrl.create({
       inputs: [
-        { type: 'text', name: 'newEmail', placeholder: 'Your new email' },
-        { name: 'password', placeholder: 'Your password', type: 'password' }
+        { type: 'text', name: 'newEmail', placeholder: 'Deine neue Email-Addresse' },
+        { name: 'password', placeholder: 'Dein Passwort', type: 'password' }
       ],
       buttons: [
         { text: 'Cancel' },
@@ -85,8 +86,8 @@ export class ProfilePage implements OnInit {
   async updatePassword(): Promise<void> {
     const alert = await this.alertCtrl.create({
       inputs: [
-        { name: 'newPassword', placeholder: 'New password', type: 'password' },
-        { name: 'oldPassword', placeholder: 'Old password', type: 'password' }
+        { name: 'newPassword', placeholder: 'Neues Passwort', type: 'password' },
+        { name: 'oldPassword', placeholder: 'Altes passwort', type: 'password' }
       ],
       buttons: [
         { text: 'Cancel' },
@@ -102,5 +103,9 @@ export class ProfilePage implements OnInit {
       ]
     });
     await alert.present();
+  }
+
+  async closeModal(){
+    await this.modalController.dismiss();
   }
 }

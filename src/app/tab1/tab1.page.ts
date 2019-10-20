@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { CartModalPage } from '../cart-modal/cart-modal.page';
 import { AuthService } from '../services/auth.service';
+import { ProfilePage } from '../profile/profile.page';
 
 @Component({
   selector: 'app-tab1',
@@ -23,7 +24,8 @@ export class Tab1Page implements OnInit {
     private router: Router,
     private data: DataService,
     public modalController: ModalController,
-    private authService: AuthService
+    private authService: AuthService,
+    public toastController: ToastController
   ) { }
 
 
@@ -32,30 +34,27 @@ export class Tab1Page implements OnInit {
       .then(result => {
         this.items = result;
       })
-    if(this.authService.afAuth.auth.currentUser == null) {
+    if (this.authService.afAuth.auth.currentUser == null) {
       //this.router.navigate(["/login"])
     } else {
       this.uid = this.authService.afAuth.auth.currentUser.uid
     }
-    this.firebaseService.getFavs()
-    .then(result => {
-      this.favs = result;
-    })
+    this.loadFavs()
   }
 
   ionViewWillEnter() {
-    this.firebaseService.getFavs()
-    .then(result => {
-      this.favs = result;
-      console.log(this.favs[0].payload.doc.data().extra[0].name)
-    })
+    this.loadFavs()
   }
 
   ionViewDidEnter() {
+    this.loadFavs()
+  }
+
+  loadFavs() {
     this.firebaseService.getFavs()
-    .then(result => {
-      this.favs = result;
-    })
+      .then(result => {
+        this.favs = result;
+      })
   }
 
   toDetailPage(item) {
@@ -64,10 +63,36 @@ export class Tab1Page implements OnInit {
     this.router.navigate(["/detail"]);
   }
 
+  addFavToCart(index) {
+    let coffee = this.favs[index].payload.doc.data();
+    this.firebaseService.createCart(coffee, coffee.extra, +coffee.totalprice.toFixed(2))
+    this.presentToast('Favorit zum Warenkorb hinzugefügt!')
+  }
+
+  async presentToast(message) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
+  }
+
   async toCart() {
     const modal = await this.modalController.create({
       component: CartModalPage
     });
     return await modal.present();
   }
+
+  async toProfile() {
+    const modal = await this.modalController.create({
+      component: ProfilePage
+    });
+    return await modal.present();
+  }
+}
+
+class Item {
+  public name;
+  public price;
 }

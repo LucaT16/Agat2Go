@@ -1,4 +1,4 @@
-import { NgModule, InjectionToken } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { CartModalPage } from './cart-modal/cart-modal.page';
@@ -13,10 +13,11 @@ import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { DataService } from './services/data.service';
+import { ProfilePage } from './profile/profile.page';
 
 @NgModule({
-  declarations: [AppComponent,CartModalPage],
-  entryComponents: [CartModalPage],
+  declarations: [AppComponent,CartModalPage, ProfilePage],
+  entryComponents: [CartModalPage, ProfilePage],
   imports: [
     BrowserModule, 
     IonicModule.forRoot(), 

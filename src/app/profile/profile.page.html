@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
+    <ion-buttons (click)="closeModal()" slot="start">
+      Schließen
     </ion-buttons>
     <ion-title>Profile Page</ion-title>
     <ion-buttons slot="end">
@@ -14,18 +14,18 @@
 
 <ion-content>
   <ion-list>
-    <ion-list-header> Personal Information </ion-list-header>
+    <ion-list-header> Persönliche Informationen </ion-list-header>
   </ion-list>
   <ion-item (click)="updateName()">
     <ion-label>
       <ion-grid>
         <ion-row>
           <ion-col class="text-left" size="5"> Name </ion-col>
-          <ion-col class="text-center" size="7" *ngIf="userProfile?.fullName">
-            {{userProfile?.fullName}}
+          <ion-col class="text-center" size="7" *ngIf="user?.name">
+            {{user?.name}}
           </ion-col>
-          <ion-col size="7" class="placeholder-profile text-center" *ngIf="!userProfile?.fullName">
-            <span> Tap here to edit. </span>
+          <ion-col size="7" class="placeholder-profile text-right" *ngIf="!user?.name">
+            <span> Klicken zum Bearbeiten </span>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -37,11 +37,11 @@
       <ion-grid>
         <ion-row>
           <ion-col class="text-left" size="5"> Email </ion-col>
-          <ion-col class="text-center" size="7" *ngIf="userProfile?.email">
-            {{userProfile?.email}}
+          <ion-col class="text-center" size="7" *ngIf="user?.email">
+            {{user?.email}}
           </ion-col>
-          <ion-col size="7" class="placeholder-profile text-center" *ngIf="!userProfile?.email">
-            <span> Tap here to edit. </span>
+          <ion-col size="7" class="placeholder-profile text-center" *ngIf="!user?.email">
+            <span> Klicken zum Bearbeiten </span>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -52,9 +52,9 @@
     <ion-label>
       <ion-grid>
         <ion-row>
-          <ion-col class="text-left" size="5"> Password </ion-col>
+          <ion-col class="text-left" size="5"> Passwort </ion-col>
           <ion-col class="text-center" size="7" class="placeholder-profile">
-            <span> Tap here to edit. </span>
+            <span> Klicken zum Bearbeiten </span>
           </ion-col>
         </ion-row>
       </ion-grid>

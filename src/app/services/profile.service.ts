@@ -24,12 +24,12 @@ export class ProfileService {
   async getUserProfile(): Promise<Observable<UserProfile>> {
     const user: firebase.User = await this.authService.getUser();
     this.currentUser = user;
-    this.userProfile = this.firestore.doc(`userProfile/${user.uid}`);
+    this.userProfile = this.firestore.doc(`user/${user.uid}`);
     return this.userProfile.valueChanges();
   }
 
-  updateName(fullName: string): Promise<void> {
-    return this.userProfile.update({ fullName });
+  updateName(name: string): Promise<void> {
+    return this.userProfile.update({ name });
   }
 
   async updateEmail(newEmail: string, password: string): Promise<void> {
