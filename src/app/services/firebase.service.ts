@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 import 'firebase/storage';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AuthService } from './auth.service';
 
 
 
@@ -11,19 +12,15 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class FirebaseService {
 
-  private snapshotChangesSubscription: any;
-  public currentUser: firebase.User;
-
   constructor(
     public afs: AngularFirestore,
-    public afAuth: AngularFireAuth
-  ){
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.currentUser = user;
-      }
-    });
-  }
+    public afAuth: AngularFireAuth,
+    private authService: AuthService
+  ){}
+
+  private snapshotChangesSubscription: any;
+  public userId = this.authService.userId;
+
 
   getProducts(){
     return new Promise<any>((resolve, reject) => {
@@ -54,7 +51,7 @@ export class FirebaseService {
 
   getFavs(){
     return new Promise<any>((resolve, reject) => {
-      this.afs.collection('user').doc(this.currentUser.uid).collection('favs').snapshotChanges()
+      this.afs.collection('user').doc(this.userId).collection('favs').snapshotChanges()
       .subscribe(snapshots => {
         resolve(snapshots)
       })
@@ -64,7 +61,7 @@ export class FirebaseService {
   getCart(){
     return new Promise<any>((resolve, reject) => {
       // let currentUser = firebase.auth().currentUser;
-      this.afs.collection('user').doc(this.currentUser.uid).collection('carts').snapshotChanges()
+      this.afs.collection('user').doc(this.userId).collection('carts').snapshotChanges()
       .subscribe(snapshots => {
         resolve(snapshots)
       })
@@ -101,14 +98,14 @@ export class FirebaseService {
   clearCart() {
     return new Promise<any>((resolve, reject) => {
       // let currentUser = firebase.auth().currentUser;
-      // this.afs.collection('user').doc(this.currentUser.uid).collection('carts').delete()
+      // this.afs.collection('user').doc(this.userId).collection('carts').delete()
     })
   }
 
   createCart(coffee, extras, totalprice){
     return new Promise<any>((resolve, reject) => {
       // let currentUser = firebase.auth().currentUser;
-      this.afs.collection('user').doc(this.currentUser.uid).collection('carts').add({
+      this.afs.collection('user').doc(this.userId).collection('carts').add({
         name: coffee.name,
         price: coffee.price,
         totalprice: totalprice,
@@ -124,7 +121,7 @@ export class FirebaseService {
   createFav(coffee, extras, totalprice){
     return new Promise<any>((resolve, reject) => {
       // let currentUser = firebase.auth().currentUser;
-      this.afs.collection('user').doc(this.currentUser.uid).collection('favs').add({
+      this.afs.collection('user').doc(this.userId).collection('favs').add({
         name: coffee.name,
         price: coffee.price,
         totalprice: totalprice,
@@ -141,7 +138,7 @@ export class FirebaseService {
       // let currentUser = firebase.auth().currentUser;
       this.afs.collection('order').add({
         products: items,
-        user: this.currentUser.uid
+        user: this.userId
       })
       .then(
         res => resolve(res),

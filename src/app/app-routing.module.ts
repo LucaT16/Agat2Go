@@ -5,7 +5,9 @@ const routes: Routes = [
   { path: 'tabs', redirectTo: 'tabs', pathMatch: 'full' },
   { path: '', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
-  { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
+  { path: 'signup',loadChildren: './signup/signup.module#SignupPageModule'},
+  { path: 'reset-password', loadChildren: './reset-password/reset-password.module#ResetPasswordPageModule'},
+  { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule'},
   { path: 'tabs', loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)},
   { path: 'detail', loadChildren: './detail/detail.module#DetailPageModule' },
   { path: 'cart-modal', loadChildren: './cart-modal/cart-modal.module#CartModalPageModule' }

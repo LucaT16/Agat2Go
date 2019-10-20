@@ -1,50 +1,48 @@
 import { Injectable } from '@angular/core';
-import * as firebase from 'firebase/app';
-import { FirebaseService } from './firebase.service';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { first } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
+  public userId: string;
   constructor(
-    private firebaseService: FirebaseService,
-    public afAuth: AngularFireAuth
-  ){}
+    public afAuth: AngularFireAuth,
+    private firestore: AngularFirestore
+  ) {}
 
-  doRegister(value){
-   return new Promise<any>((resolve, reject) => {
-     firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
-     .then(
-       res => resolve(res),
-       err => reject(err))
-   })
+  getUser(): Promise<firebase.User> {
+    return this.afAuth.authState.pipe(first()).toPromise();
   }
 
-  doLogin(value){
-   return new Promise<any>((resolve, reject) => {
-     firebase.auth().signInWithEmailAndPassword(value.email, value.password)
-     .then(
-       res => resolve(res),
-       err => reject(err))
-   })
+  login(
+    email: string,
+    password: string
+  ): Promise<firebase.auth.UserCredential> {
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
-  doLogout(){
-    return new Promise((resolve, reject) => {
-      this.afAuth.auth.signOut()
-      .then(() => {
-        this.firebaseService.unsubscribeOnLogOut();
-        resolve();
-      }).catch((error) => {
-        console.log(error);
-        reject();
-      });
-    })
+  async signup(
+    email: string,
+    password: string
+  ): Promise<firebase.auth.UserCredential> {
+    const newUserCredential: firebase.auth.UserCredential = await this.afAuth.auth.createUserWithEmailAndPassword(
+      email,
+      password
+    );
+    await this.firestore
+      .doc(`user/${newUserCredential.user.uid}`)
+      .set({ email });
+    return newUserCredential;
   }
 
-  userDetails(){
-    return firebase.auth().currentUser;
+  resetPassword(email: string): Promise<void> {
+    return this.afAuth.auth.sendPasswordResetEmail(email);
+  }
+
+  logout(): Promise<void> {
+    return this.afAuth.auth.signOut();
   }
 }
