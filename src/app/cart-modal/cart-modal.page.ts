@@ -23,9 +23,11 @@ export class CartModalPage implements OnInit {
     this.firebaseService.getCart()
     .then(result => {
       this.items = result;
+      console.log(result)
       this.items.forEach(element => {
         this.totalprice += +element.payload.doc.data().totalprice;
         this.formattedItems.push(element.payload.doc.data());
+        console.log(element.payload.doc.id)
       });
       console.log(this.formattedItems)
     })
@@ -35,7 +37,14 @@ export class CartModalPage implements OnInit {
     this.firebaseService.createOrder(this.formattedItems)
     .then(result => {
       console.log('Bestellung wurde aufgegeben')
-      
+      this.items.forEach(element => {
+        console.log("Delete: " + element.payload.doc.id)
+        this.firebaseService.deleteItemFromCart(element.payload.doc.id)
+        .then(result => {
+          
+        })
+      });
+
     }, err => {
       console.log("Fehler beim Erstellen der Bestellung")
     })
