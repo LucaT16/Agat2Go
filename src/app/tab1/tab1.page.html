@@ -4,7 +4,7 @@
       Home
     </ion-title>
     <ion-buttons (click)="toCart()" slot="primary">
-      <ion-icon slot="icon-only" name="cart" ></ion-icon>
+      <ion-icon slot="icon-only" name="cart"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -20,7 +20,6 @@
         <span>{{item.payload.doc.data().name}}, <b>{{item.payload.doc.data().extra[0].name}}</b></span>
         <h4>{{item.payload.doc.data().totalprice.toFixed(2)}} €</h4>
       </ion-label>
-
     </ion-item>
   </ion-list>
 
