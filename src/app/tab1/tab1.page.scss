@@ -13,3 +13,24 @@ span b {
   font-size: 60%;
   font-weight: inherit; 
 }
+button {
+
+  background-color: transparent;
+	ion-badge {
+		position: absolute;
+		top: -0.1rem;
+		right: -0.0rem;
+    opacity: 1;
+    z-index: 1;
+
+		& ~ ion-icon {
+      margin-right: 1.2rem;
+      z-index: -1;
+		}
+	}
+}
+
+ion-buttons {
+  color: clear;
+  background-color: clear;
+}

@@ -18,6 +18,7 @@ export class Tab1Page implements OnInit {
   favs: Array<any>;
   prodId: string;
   uid: String;
+  badgeCount = 0;
 
   constructor(
     public firebaseService: FirebaseService,
@@ -44,6 +45,7 @@ export class Tab1Page implements OnInit {
 
   ionViewWillEnter() {
     this.loadFavs()
+    this.loadCart()
   }
 
   ionViewDidEnter() {
@@ -67,6 +69,17 @@ export class Tab1Page implements OnInit {
     let coffee = this.favs[index].payload.doc.data();
     this.firebaseService.createCart(coffee, coffee.extra, +coffee.totalprice.toFixed(2))
     this.presentToast('Favorit zum Warenkorb hinzugefügt!')
+  }
+
+  loadCart() {
+    this.badgeCount = 0;
+    this.firebaseService.getCart()
+    .then(result => {
+      result.forEach(element => {
+        this.badgeCount++;
+      });
+      console.log(this.badgeCount)
+    })
   }
 
   async presentToast(message) {

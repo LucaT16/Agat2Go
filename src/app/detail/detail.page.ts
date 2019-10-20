@@ -4,7 +4,6 @@ import { FirebaseService } from '../services/firebase.service';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { CartModalPage } from '../cart-modal/cart-modal.page';
-import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-detail',
@@ -20,7 +19,6 @@ export class DetailPage implements OnInit {
     public modalController: ModalController,
     public alertController: AlertController,
     private data: DataService,
-    private navController: NavController
     ) {}
 
   item = new Item();
@@ -75,9 +73,6 @@ export class DetailPage implements OnInit {
   }
 
   addToCart() {
-    console.log(this.item)
-    console.log(this.addedExtras)
-    console.log(this.totalprice.toFixed(2))
    this.firebaseService.createCart(this.item, this.addedExtras, +this.totalprice.toFixed(2))
    this.router.navigate(["/tabs/tab1"])
   }
