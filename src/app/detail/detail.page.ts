@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
-import { VirtualTimeScheduler } from 'rxjs';
 import { CartModalPage } from '../cart-modal/cart-modal.page';
 import { NavController } from '@ionic/angular';
 
@@ -27,9 +26,10 @@ export class DetailPage implements OnInit {
   item = new Item();
   prodId: String;
   backBtn = "Zurück";
-  extras: Array<Extra>;
+  extras: Array<any>;
   addedExtras: Array<Extra> = []; 
   totalprice = 0;
+  lastExtraPrice = 0;
 
 
   ngOnInit() {
@@ -66,27 +66,12 @@ export class DetailPage implements OnInit {
     return await modal.present();
   }
 
-  addExtra(item) {
-
-    var extraExists = false;
-    var count = 0;
-
-    this.addedExtras.forEach(element => {
-      if(element.name == item.name){
-        extraExists = true
-      }
-      if(extraExists == false){
-        count++;
-      }
-    });
-
-    if(extraExists){
-      this.addedExtras.splice(count, 1);
-      this.totalprice -= +item.price
-    } else {
-      this.addedExtras.push(item)
-      this.totalprice += +item.price
-    }
+  radioSelected(index) {
+    this.totalprice -= this.lastExtraPrice
+    this.addedExtras = []
+    this.addedExtras.push(this.extras[index].payload.doc.data())
+    this.lastExtraPrice = this.extras[index].payload.doc.data().price
+    this.totalprice += this.lastExtraPrice
   }
 
   addToCart() {

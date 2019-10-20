@@ -21,16 +21,19 @@
 
 
   <ion-list>
-    <ion-list-header>
-      <ion-label>Extras</ion-label>
-    </ion-list-header>
-    <ion-item *ngFor="let item of extras">
-      <ion-label>
-        <h2>{{item.payload.doc.data().name}}</h2>
-        <h3>{{item.payload.doc.data().price.toFixed(2)}} €</h3>
-      </ion-label>
-      <ion-checkbox slot="end" (click)="addExtra(item.payload.doc.data())"></ion-checkbox>
-    </ion-item>
+    <ion-radio-group>
+      <ion-list-header>
+        <ion-label>Extras</ion-label>
+      </ion-list-header>
+      <ion-item *ngFor="let item of extras" (ionSelect)="radioSelected(extras.indexOf(item))">
+        <ion-label>
+          <h2>{{item.payload.doc.data().name}}</h2>
+          <h3>{{item.payload.doc.data().price.toFixed(2)}} €</h3>
+        </ion-label>
+        <ion-radio slot="end"></ion-radio>
+        <!--<ion-checkbox slot="end" (click)="newAddExtra(extras.indexOf(item))"></ion-checkbox>-->
+      </ion-item>
+    </ion-radio-group>
   </ion-list>
 
   <ion-item>

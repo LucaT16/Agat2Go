@@ -1,0 +1,19 @@
+
+.radio-icon{
+  visibility: visible;
+}
+ .radio-icon:before{ 
+  content: "\f3a6";
+  font-family: Ionicons;
+  overflow: hidden;
+}
+
+.item-radio input:checked + .radio-content .radio-icon:before{ 
+  visibility: visible;
+  content: "\f3a7";
+  font-family: Ionicons;
+}
+
+.radio-icon.ion-checkmark:before {
+    content: "";
+}
