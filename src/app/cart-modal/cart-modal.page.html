@@ -39,9 +39,13 @@
     </ion-col>
   </ion-row>
 
+<br>
+  <ion-item>
+    <ion-label>Abholzeit</ion-label>
+    <ion-datetime placeholder="Zeit auswählen" display-format="H:mm" picker-format="H:mm"  min="08:00" max="16:30"></ion-datetime>
+  </ion-item>
+<br>
   <ion-row>
-   
-    
     <ion-col offset-4>
       <section>
         <ion-button size="block" (click)="order()">Bestellen</ion-button>
