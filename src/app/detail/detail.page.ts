@@ -29,6 +29,7 @@ export class DetailPage implements OnInit {
   addedExtras: Array<Extra> = []; 
   totalprice = 0;
   lastExtraPrice = 0;
+  countFavs = 0;
 
 
   ngOnInit() {
@@ -45,6 +46,7 @@ export class DetailPage implements OnInit {
     .then(result => {
       this.extras = result;
     })
+    this.loadFavs()
   }
 
   async presentToast(message) {
@@ -55,12 +57,11 @@ export class DetailPage implements OnInit {
     toast.present();
   }
 
-  async favoriteAlert() {
+  async presentAlert(header, message, buttons) {
     const alert = await this.alertController.create({
-      header: 'Glückwunsch!',
-     // subHeader: 'Subtitle',
-      message: 'Sie haben einen neuen Favoriten hinzugefügt.',
-      buttons: ['Alles klar']
+      header: header,
+      message: message,
+      buttons: buttons
     });
 
     await alert.present();
@@ -87,10 +88,27 @@ export class DetailPage implements OnInit {
   }
 
   addToFavorite() {
-    this.firebaseService.createFav(this.item, this.addedExtras, +this.totalprice.toFixed(2))
-   // alert("Favorit hinzugefügt!")
-    this.presentToast('Favorit hinzugefügt')
+    if(this.countFavs >= 3) {
+      this.presentAlert('Limit erreicht', "Sie können nur 3 Favoriten hinzufügen.", ['OK'])
+    } else {
+      this.firebaseService.createFav(this.item, this.addedExtras, +this.totalprice.toFixed(2))
+      .then(res => {
+        this.presentToast('Favorit hinzugefügt')
+      }, 
+      err => {
+        this.presentToast('Fehler beim Hinzufügen des Favoriten')
+      })
+    }
    }
+
+   loadFavs() {
+    this.firebaseService.getFavs()
+      .then(result => {
+        result.forEach(element => {
+          this.countFavs++;
+        });
+      })
+  }
 }
 
 class Item {

@@ -21,8 +21,9 @@
     <ion-list-header>
       <ion-label>Favoriten</ion-label>
     </ion-list-header>
-    <ion-item *ngFor="let item of favs" (click)="addFavToCart(favs.indexOf(item))">
-      <ion-icon slot="end" color="medium" name="add-circle-outline"></ion-icon>
+    <ion-item *ngFor="let item of favs">
+      <ion-icon slot="end" color="medium" name="trash" (click)="removeFav(item.payload.doc.id)"></ion-icon>
+      <ion-icon slot="end" color="medium" name="add-circle-outline"  (click)="addFavToCart(favs.indexOf(item))"></ion-icon>
       <ion-label>
         <span>{{item.payload.doc.data().name}}, <b
             *ngIf="item.payload.doc.data().extra[0]?.name">{{item.payload.doc.data().extra[0].name}}</b></span>
