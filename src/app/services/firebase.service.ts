@@ -19,6 +19,8 @@ export class FirebaseService {
   ){}
 
   private snapshotChangesSubscription: any;
+  public userId = this.authService.userId;
+  
 
 
   getProducts(){
