@@ -19,8 +19,7 @@ export class FirebaseService {
   ){}
 
   private snapshotChangesSubscription: any;
-  public userId = this.authService.userId;
-  
+  public userId = this.authService.userId //"ykcNl10gYmOnrsyqHLfkHnZxC5E3";
 
 
   getProducts(){
