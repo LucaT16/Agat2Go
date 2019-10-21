@@ -59,6 +59,13 @@ export class Tab1Page implements OnInit {
       })
   }
 
+  removeFav(id){
+    this.firebaseService.deleteFav(id)
+    .then(result => {
+      this.loadFavs()
+    })
+  }
+
   toDetailPage(item) {
     this.prodId = item.payload.doc.data().id;
     this.data.changeMessage(this.prodId);
@@ -78,7 +85,6 @@ export class Tab1Page implements OnInit {
       result.forEach(element => {
         this.badgeCount++;
       });
-      console.log(this.badgeCount)
     })
   }
 

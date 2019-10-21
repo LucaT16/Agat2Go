@@ -19,7 +19,7 @@ export class FirebaseService {
   ){}
 
   private snapshotChangesSubscription: any;
-  public userId = this.authService.userId //"ykcNl10gYmOnrsyqHLfkHnZxC5E3";
+  public userId = "ykcNl10gYmOnrsyqHLfkHnZxC5E3"; //this.authService.userId
 
 
   getProducts(){
@@ -97,6 +97,16 @@ export class FirebaseService {
   deleteItemFromCart(itemId) {
     return new Promise<any>((resolve, reject) => {
        this.afs.collection('user').doc(this.userId).collection('carts').doc(itemId).delete()
+       .then(
+         res => resolve(res),
+         err => reject(err)
+       )
+    })
+  }
+
+  deleteFav(itemId) {
+    return new Promise<any>((resolve, reject) => {
+       this.afs.collection('user').doc(this.userId).collection('favs').doc(itemId).delete()
        .then(
          res => resolve(res),
          err => reject(err)
