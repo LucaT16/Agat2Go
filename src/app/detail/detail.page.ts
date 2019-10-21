@@ -1,4 +1,4 @@
-import { ModalController, AlertController } from '@ionic/angular';
+import { ModalController, AlertController, ToastController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
 import { Router } from '@angular/router';
@@ -19,6 +19,7 @@ export class DetailPage implements OnInit {
     public modalController: ModalController,
     public alertController: AlertController,
     private data: DataService,
+    public toastController: ToastController
     ) {}
 
   item = new Item();
@@ -44,6 +45,14 @@ export class DetailPage implements OnInit {
     .then(result => {
       this.extras = result;
     })
+  }
+
+  async presentToast(message) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
   }
 
   async favoriteAlert() {
@@ -80,7 +89,7 @@ export class DetailPage implements OnInit {
   addToFavorite() {
     this.firebaseService.createFav(this.item, this.addedExtras, +this.totalprice.toFixed(2))
    // alert("Favorit hinzugefügt!")
-    this.favoriteAlert();
+    this.presentToast('Favorit hinzugefügt')
    }
 }
 

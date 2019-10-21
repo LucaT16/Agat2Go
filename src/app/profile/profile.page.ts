@@ -30,6 +30,7 @@ export class ProfilePage implements OnInit {
 
   async logOut(): Promise<void> {
     await this.authService.logout();
+    this.closeModal()
     this.router.navigateByUrl('login');
   }
 
