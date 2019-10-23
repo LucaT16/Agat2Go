@@ -84,7 +84,8 @@ export class DetailPage implements OnInit {
 
   addToCart() {
    this.firebaseService.createCart(this.item, this.addedExtras, +this.totalprice.toFixed(2))
-   this.router.navigate(["/tabs/tab1"])
+   this.presentAlert('Gut gemacht!', "Ihre Bestellung wurde zum Warenkorb hinzugefügt.", ['Weiter einkaufen', 'Zum Warenkorb'])
+   //this.router.navigate(["/tabs/tab1"])
   }
 
   addToFavorite() {
