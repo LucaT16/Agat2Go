@@ -3,10 +3,17 @@
     <ion-title>
       Home
     </ion-title>
-    <ion-buttons (click)="toCart()" slot="primary">
+    <ion-buttons *ngIf="!agataClosed" (click)="toCart()" slot="primary">
       <button ion-button icon-only id="notification-button">
         <ion-badge id="notifications-badge" color="danger" *ngIf="badgeCount > 0">{{badgeCount}}</ion-badge>
         <ion-icon slot="icon-only" name="cart">
+        </ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons *ngIf="agataClosed" (click)="closedNotification()" slot="primary">
+      <button ion-button icon-only disabled id="notification-button">
+        <ion-badge id="notifications-badge" color="danger" *ngIf="badgeCount > 0">{{badgeCount}}</ion-badge>
+        <ion-icon slot="icon-only"  name="cart">
         </ion-icon>
       </button>
     </ion-buttons>

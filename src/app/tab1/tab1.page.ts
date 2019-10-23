@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
-import { ModalController, ToastController, NavController } from '@ionic/angular';
+import { ModalController, ToastController, AlertController } from '@ionic/angular';
 import { CartModalPage } from '../cart-modal/cart-modal.page';
 import { AuthService } from '../services/auth.service';
 import { ProfilePage } from '../profile/profile.page';
@@ -19,6 +19,7 @@ export class Tab1Page implements OnInit {
   prodId: string;
   uid: String;
   badgeCount = 0;
+  agataClosed = false;
 
   constructor(
     public firebaseService: FirebaseService,
@@ -27,7 +28,7 @@ export class Tab1Page implements OnInit {
     public modalController: ModalController,
     private authService: AuthService,
     public toastController: ToastController,
-    public navController: NavController
+    public alertController: AlertController
     ) { }
 
 
@@ -41,6 +42,7 @@ export class Tab1Page implements OnInit {
     } else {
       this.uid = this.authService.afAuth.auth.currentUser.uid
     }
+    this.getTime()
     this.loadFavs()
     //setInterval(()=> { this.ionViewDidEnter() }, 1 * 1000); //Machen wir zur Präsention wieder rein sonst ist die DB gefickt
   }
@@ -86,12 +88,36 @@ export class Tab1Page implements OnInit {
     })
   }
 
+  getTime() {
+    var d = new Date().toLocaleString("en-EN", {timeZone: "Europe/Berlin"});
+    var date = new Date(d)
+    var timeString = date.toTimeString()
+
+    if(timeString = "17:30:00 GMT+0200") {
+      this.agataClosed = true;
+    }
+  }
+
+  closedNotification(){
+    this.presentAlert("Agata hat geschlossen!", "Wir haben leider schon geschlossen. Schau doch einfach nochmal morgen vorbei!", ['OK'])
+  }
+
   async presentToast(message) {
     const toast = await this.toastController.create({
       message: message,
       duration: 2000
     });
     toast.present();
+  }
+
+  async presentAlert(header, message, buttons) {
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: buttons
+    });
+
+    await alert.present();
   }
 
   async toCart() {

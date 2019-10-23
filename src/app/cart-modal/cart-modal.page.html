@@ -42,13 +42,14 @@
 <br>
   <ion-item>
     <ion-label>Abholzeit</ion-label>
-    <ion-datetime placeholder="Zeit auswählen" display-format="H:mm" picker-format="H:mm"  min="08:00" max="16:30"></ion-datetime>
+    <ion-datetime placeholder="Zeit auswählen" display-format="H:mm" picker-format="H:mm"  min="{{currentTime}}" max="17:30" (ionChange)="setTime($event)"></ion-datetime>
   </ion-item>
 <br>
   <ion-row>
     <ion-col offset-4>
       <section>
-        <ion-button size="block" (click)="order()">Bestellen</ion-button>
+        <ion-button *ngIf="!timeSet" size="block" disabled>Bestellen</ion-button>
+        <ion-button *ngIf="timeSet" size="block" (click)="order()">Bestellen</ion-button>
       </section>
     </ion-col>
   </ion-row>
