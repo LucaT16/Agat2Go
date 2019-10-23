@@ -6,7 +6,7 @@
       authForm.controls['name'].touched">
     </ion-input>
   </ion-item>
-  <ion-item class="error-message" *ngIf="!authForm.controls['name'].valid &&
+  <ion-item class="error-message" *ngIf="!isLoginPage && !authForm.controls['name'].valid &&
        authForm.controls['name'].touched">
     <ion-label>Bitte gebe deinen Namen ein.</ion-label>
   </ion-item>
