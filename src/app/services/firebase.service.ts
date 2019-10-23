@@ -153,12 +153,15 @@ export class FirebaseService {
       )
     })
   }
-  createOrder(items) {
+
+  createOrder(items, time) {
     return new Promise<any>((resolve, reject) => {
       // let currentUser = firebase.auth().currentUser;
       this.afs.collection('order').add({
         products: items,
-        user: this.user.name
+        user: this.user.name,
+        userId: this.userId,
+        time: time
       })
       .then(
         res => resolve(res),

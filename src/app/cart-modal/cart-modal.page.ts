@@ -17,11 +17,14 @@ export class CartModalPage implements OnInit {
     items: Array<any>;
     formattedItems: Array<any> = [];
     totalprice = 0;
-    displayCoffee;
     ordered = false;
+    timestamp: string;
+    timeSet = false;
+    currentTime: string;
 
   ngOnInit() {
     this.loadCart()
+    this.getTime()
   }
 
   loadCart() {
@@ -37,7 +40,7 @@ export class CartModalPage implements OnInit {
   }
 
   order() {
-    this.firebaseService.createOrder(this.formattedItems)
+    this.firebaseService.createOrder(this.formattedItems, this.timestamp)
     .then(result => {
       console.log('Bestellung wurde aufgegeben')
       this.items.forEach(element => {
@@ -67,6 +70,19 @@ export class CartModalPage implements OnInit {
         this.loadCart()
       })
     });
+  }
+
+  getTime() {
+    var d = new Date().toLocaleString("en-EN", {timeZone: "Europe/Berlin"});
+    var date = new Date(d)
+    var min = date.getMinutes()
+    var hours = date.getHours()
+    this.currentTime = hours + ":" + min
+  }
+
+  setTime($event){
+    this.timeSet = true;
+    this.timestamp = $event.detail.value;
   }
 
   async closeModal(){
