@@ -31,7 +31,6 @@ export class DetailPage implements OnInit {
   lastExtraPrice = 0;
   countFavs = 0;
 
-
   ngOnInit() {
     this.data.currentMessage.subscribe(prodId => this.prodId = prodId)
     if(this.prodId == "no id"){
@@ -47,6 +46,23 @@ export class DetailPage implements OnInit {
       this.extras = result;
     })
     this.loadFavs()
+
+  }
+
+  ionViewWillEnter(){
+    console.log("Details Will Enter")
+  }
+
+  ionViewDidEnter() {
+    console.log("Details did Enter")
+  }
+
+  ionViewWillLeave(){
+    console.log("Details Will Leave")
+  }
+
+  ionViewDidLeave(){
+    console.log("Details did Leave")
   }
 
   async presentToast(message) {

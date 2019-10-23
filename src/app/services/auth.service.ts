@@ -8,6 +8,8 @@ import { first } from 'rxjs/operators';
 })
 export class AuthService {
   public userId: string;
+  public userProfile;
+
   constructor(
     public afAuth: AngularFireAuth,
     private firestore: AngularFirestore
@@ -17,24 +19,18 @@ export class AuthService {
     return this.afAuth.authState.pipe(first()).toPromise();
   }
 
-  login(
-    email: string,
-    password: string
-  ): Promise<firebase.auth.UserCredential> {
+  login(email: string, password: string): Promise<firebase.auth.UserCredential> {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
-  async signup(
-    email: string,
-    password: string
-  ): Promise<firebase.auth.UserCredential> {
+  async signup(email: string, password: string, name: String): Promise<firebase.auth.UserCredential> {
     const newUserCredential: firebase.auth.UserCredential = await this.afAuth.auth.createUserWithEmailAndPassword(
       email,
       password
     );
     await this.firestore
       .doc(`user/${newUserCredential.user.uid}`)
-      .set({ email });
+      .set({ email, name});
     return newUserCredential;
   }
 

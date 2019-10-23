@@ -15,7 +15,7 @@ import { UserProfile } from '../models/user';
 })
 export class ProfileService {
   private userProfile: AngularFirestoreDocument<UserProfile>;
-  private currentUser: firebase.User;
+  public currentUser: firebase.User;
   constructor(
     private firestore: AngularFirestore,
     private authService: AuthService

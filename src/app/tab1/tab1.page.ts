@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
-import { ModalController, ToastController } from '@ionic/angular';
+import { ModalController, ToastController, NavController } from '@ionic/angular';
 import { CartModalPage } from '../cart-modal/cart-modal.page';
 import { AuthService } from '../services/auth.service';
 import { ProfilePage } from '../profile/profile.page';
@@ -26,8 +26,9 @@ export class Tab1Page implements OnInit {
     private data: DataService,
     public modalController: ModalController,
     private authService: AuthService,
-    public toastController: ToastController
-  ) { }
+    public toastController: ToastController,
+    public navController: NavController
+    ) { }
 
 
   ngOnInit() {
@@ -41,15 +42,25 @@ export class Tab1Page implements OnInit {
       this.uid = this.authService.afAuth.auth.currentUser.uid
     }
     this.loadFavs()
+    console.log("ionView init")
   }
 
-  ionViewWillEnter() {
-    this.loadFavs()
-    this.loadCart()
+  ionViewWillEnter(){
+    console.log("ionView Will Enter")
   }
 
   ionViewDidEnter() {
     this.loadFavs()
+    this.loadCart()
+    console.log("ionView did Enter")
+  }
+
+  ionViewWillLeave(){
+    console.log("ionView Will Leave")
+  }
+
+  ionViewDidLeave(){
+    console.log("ionView did Leave")
   }
 
   loadFavs() {
@@ -76,6 +87,7 @@ export class Tab1Page implements OnInit {
     let coffee = this.favs[index].payload.doc.data();
     this.firebaseService.createCart(coffee, coffee.extra, +coffee.totalprice.toFixed(2))
     this.presentToast('Favorit zum Warenkorb hinzugefügt!')
+    this.badgeCount++;
   }
 
   loadCart() {
@@ -100,6 +112,9 @@ export class Tab1Page implements OnInit {
     const modal = await this.modalController.create({
       component: CartModalPage
     });
+    modal.onDidDismiss().then(() => {
+      this.ionViewDidEnter()
+    });
     return await modal.present();
   }
 
@@ -109,9 +124,4 @@ export class Tab1Page implements OnInit {
     });
     return await modal.present();
   }
-}
-
-class Item {
-  public name;
-  public price;
 }

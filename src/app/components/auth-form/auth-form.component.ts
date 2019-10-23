@@ -13,6 +13,7 @@ export class AuthFormComponent implements OnInit {
   public authForm: FormGroup;
   @Input() actionButtonText: string;
   @Input() isPasswordResetPage = false;
+  @Input() isLoginPage = false;
   @Output() formSubmitted = new EventEmitter<any>();
 
   constructor(
@@ -34,9 +35,16 @@ export class AuthFormComponent implements OnInit {
       console.log('Form is not valid yet, current value:', authForm.value);
     } else {
       this.showLoading();
+      var name: string;
+      if(!this.isLoginPage){
+        name = authForm.value.name
+      } else {
+        name = ""
+      }
       const credentials: UserCredential = {
         email: authForm.value.email,
-        password: authForm.value.password
+        password: authForm.value.password,
+        name: name
       };
       this.formSubmitted.emit(credentials);
     }

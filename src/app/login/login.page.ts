@@ -10,7 +10,7 @@ import { AuthFormComponent } from '../components/auth-form/auth-form.component';
   styleUrls: ['./login.page.scss']
 })
 export class LoginPage implements OnInit {
-  @ViewChild(AuthFormComponent, { static: false }) loginForm: AuthFormComponent;
+  @ViewChild(AuthFormComponent, { static: false }) authForm: AuthFormComponent;
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {}
@@ -22,11 +22,11 @@ export class LoginPage implements OnInit {
         credentials.password
       );
       this.authService.userId = userCredential.user.uid;
-      await this.loginForm.hideLoading();
+      await this.authForm.hideLoading();
       this.router.navigateByUrl('tabs/tab1');
     } catch (error) {
-      await this.loginForm.hideLoading();
-      this.loginForm.handleError(error);
+      await this.authForm.hideLoading();
+      this.authForm.handleError(error);
     }
   }
 }

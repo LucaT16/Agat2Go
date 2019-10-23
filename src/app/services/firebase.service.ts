@@ -4,6 +4,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/storage';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from './auth.service';
+import { ProfileService } from './profile.service';
 
 
 
@@ -12,15 +13,23 @@ import { AuthService } from './auth.service';
 })
 export class FirebaseService {
 
+  public user;
+  private snapshotChangesSubscription: any;
+  public userId: string;
+
   constructor(
     public afs: AngularFirestore,
     public afAuth: AngularFireAuth,
-    private authService: AuthService
-  ){}
-
-  private snapshotChangesSubscription: any;
-  public userId = "ykcNl10gYmOnrsyqHLfkHnZxC5E3"; //this.authService.userId
-
+    private authService: AuthService,
+    public profileService: ProfileService
+  ){
+    this.profileService.getUserProfile().then(profile$ => {
+      profile$.subscribe(userProfile => {
+        this.user = userProfile;
+      });
+    });
+    this.userId =  "ykcNl10gYmOnrsyqHLfkHnZxC5E3";  //this.authService.userId;
+  }
 
   getProducts(){
     return new Promise<any>((resolve, reject) => {
@@ -149,7 +158,7 @@ export class FirebaseService {
       // let currentUser = firebase.auth().currentUser;
       this.afs.collection('order').add({
         products: items,
-        user: this.userId
+        user: this.user.name
       })
       .then(
         res => resolve(res),

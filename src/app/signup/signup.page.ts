@@ -20,7 +20,8 @@ export class SignupPage implements OnInit {
     try {
       const userCredential: firebase.auth.UserCredential = await this.authService.signup(
         credentials.email,
-        credentials.password
+        credentials.password,
+        credentials.name
       );
       this.authService.userId = userCredential.user.uid;
       await this.signupForm.hideLoading();
