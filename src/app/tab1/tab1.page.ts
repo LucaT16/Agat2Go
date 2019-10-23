@@ -42,25 +42,12 @@ export class Tab1Page implements OnInit {
       this.uid = this.authService.afAuth.auth.currentUser.uid
     }
     this.loadFavs()
-    console.log("ionView init")
-  }
-
-  ionViewWillEnter(){
-    console.log("ionView Will Enter")
+    setInterval(()=> { this.ionViewDidEnter() }, 1 * 1000);
   }
 
   ionViewDidEnter() {
     this.loadFavs()
     this.loadCart()
-    console.log("ionView did Enter")
-  }
-
-  ionViewWillLeave(){
-    console.log("ionView Will Leave")
-  }
-
-  ionViewDidLeave(){
-    console.log("ionView did Leave")
   }
 
   loadFavs() {
@@ -91,12 +78,11 @@ export class Tab1Page implements OnInit {
   }
 
   loadCart() {
-    this.badgeCount = 0;
     this.firebaseService.getCart()
     .then(result => {
-      result.forEach(element => {
-        this.badgeCount++;
-      });
+      if(this.badgeCount != result.length) {
+        this.badgeCount = result.length
+      }
     })
   }
 

@@ -49,22 +49,6 @@ export class DetailPage implements OnInit {
 
   }
 
-  ionViewWillEnter(){
-    console.log("Details Will Enter")
-  }
-
-  ionViewDidEnter() {
-    console.log("Details did Enter")
-  }
-
-  ionViewWillLeave(){
-    console.log("Details Will Leave")
-  }
-
-  ionViewDidLeave(){
-    console.log("Details did Leave")
-  }
-
   async presentToast(message) {
     const toast = await this.toastController.create({
       message: message,
