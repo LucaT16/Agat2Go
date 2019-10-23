@@ -1,6 +1,12 @@
 import { ModalController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
+import {ElementRef, ViewChild} from '@angular/core';
+
+
+
+
+
 
 @Component({
   selector: 'app-cart-modal',
@@ -73,5 +79,12 @@ export class CartModalPage implements OnInit {
     await this.modalController.dismiss();
   }
 
+
+  disableButton(){
+
+  }
+
+
 }
+
 
