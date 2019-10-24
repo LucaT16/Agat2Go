@@ -47,7 +47,7 @@
     </ion-item-sliding>
     <ion-item *ngIf="favs?.length == 0">
       <ion-label>
-        <span>Sie haben noch keine Favoriten</span>
+        <h4>Sie haben noch keine Favoriten</h4>
       </ion-label>
     </ion-item>
     <ion-item *ngIf="favs?.length != 0" class="space">
@@ -61,7 +61,7 @@
     <br>
     <ion-item *ngFor="let item of items" (click)="toDetailPage(item)">
       <ion-icon slot="end" color="medium" name="arrow-forward"></ion-icon>
-      <ion-avatar slot="start">
+      <ion-avatar style="size: 120%" slot="start">
         <img src="./assets/{{item.payload.doc.data().name}}.jpg">
       </ion-avatar>
       <ion-label>
