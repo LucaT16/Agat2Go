@@ -23,13 +23,41 @@ h2{
   letter-spacing: 1.5px;
   font-family: Cubano;
   color: rgba(0, 0, 0, 0.9);
+  font-size: 14px;
+}
+
+ion-card-title{
+  text-align: center;
+  font-size: 25px;
+  letter-spacing: 2px;
+}
+
+h5{
+  font-weight: 100;
+  letter-spacing: 1.5px;
+  font-family: Cubano;
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 18px;
+}
+
+ion-title{
+  font-weight: 100;
+  letter-spacing: 1.5px;
+  font-family: Cubano;
+  color: rgba(0, 0, 0, 0.9);
 }
 
 h3{
   font-weight: 100;
   letter-spacing: 1.5px;
   font-family: Cubano;
-  color: rgba(0, 0, 0, 0.7);
+  color: rgba(0, 0, 0, 0.5);
+}
+ion-button{
+  font-weight: 100;
+  letter-spacing: 1.5px;
+  font-family: Cubano;
+  font-size: 15px;
 }
 
 ion-content{

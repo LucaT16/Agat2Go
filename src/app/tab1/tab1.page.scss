@@ -39,16 +39,43 @@ ion-content{
   font-family: Cubano;
 }
 
-h2{
+b, ion-title{
   font-weight: 100;
   letter-spacing: 1.5px;
   font-family: Cubano;
   color: rgba(0, 0, 0, 0.9);
 }
 
+h2 ,span{
+  font-weight: 100;
+  letter-spacing: 1.5px;
+  font-family: Cubano;
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 14px;
+}
+
 h4{
   font-weight: 100;
   letter-spacing: 1.5px;
   font-family: Cubano;
-  color: rgba(0, 0, 0, 0.7);
+  color: rgba(0, 0, 0, 0.5);
+}
+
+
+ion-item-divider{
+  font-weight: 100;
+  letter-spacing: 1.5px;
+  font-family: Cubano;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.space{
+  max-height: 10px;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 20%;
 }
