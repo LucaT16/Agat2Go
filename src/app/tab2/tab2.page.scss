@@ -20,3 +20,17 @@
     text-align: center;
     font-family: Cubano;
   }
+
+  b {
+    font-weight: 100;
+    letter-spacing: 1.5px;
+    font-family: Cubano;
+    color: rgba(0, 0, 0, 0.9);
+  }
+
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+  }
