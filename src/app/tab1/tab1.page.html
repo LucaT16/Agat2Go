@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-        <img src="./assets/logo_a_trans.png" class="center">
+      <img src="./assets/logo_a_trans.png" class="center">
     </ion-title>
     <ion-buttons *ngIf="!agataClosed" (click)="toCart()" slot="primary">
       <button ion-button icon-only id="notification-button">
@@ -13,7 +13,7 @@
     <ion-buttons *ngIf="agataClosed" (click)="closedNotification()" slot="primary">
       <button ion-button icon-only disabled id="notification-button">
         <ion-badge id="notifications-badge" color="danger" *ngIf="badgeCount > 0">{{badgeCount}}</ion-badge>
-        <ion-icon slot="icon-only"  name="cart">
+        <ion-icon slot="icon-only" name="cart">
         </ion-icon>
       </button>
     </ion-buttons>
@@ -29,22 +29,29 @@
       <ion-label style="font-size:12px">Favoriten</ion-label>
     </ion-list-header>
     <br>
-    <ion-item *ngFor="let item of favs">
-      <ion-icon slot="end" color="medium" name="trash" (click)="removeFav(item.payload.doc.id)"></ion-icon>
-      <ion-icon slot="end" color="medium" name="add-circle-outline"  (click)="addFavToCart(favs.indexOf(item))"></ion-icon>
-      <ion-label>
-        <span>{{item.payload.doc.data().name}}<span *ngIf="item.payload.doc.data().extra[0]?.name">, </span> 
-          <b *ngIf="item.payload.doc.data().extra[0]?.name">{{item.payload.doc.data().extra[0].name}}</b></span>
-        <h4>{{item.payload.doc.data().totalprice.toFixed(2)}} €</h4>
-      </ion-label>
-    </ion-item>
+    <ion-item-sliding *ngFor="let item of favs">
+      <ion-item>
+        <ion-icon slot="end" color="medium" name="add-circle-outline" (click)="addFavToCart(favs.indexOf(item))">
+        </ion-icon>
+        <ion-label>
+          <span>{{item.payload.doc.data().name}}<span *ngIf="item.payload.doc.data().extra[0]?.name">, </span>
+            <b *ngIf="item.payload.doc.data().extra[0]?.name">{{item.payload.doc.data().extra[0].name}}</b></span>
+          <h4>{{item.payload.doc.data().totalprice.toFixed(2)}} €</h4>
+        </ion-label>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="removeFav(item.payload.doc.id)" icon-only>
+          <ion-icon style="width: 2em; height: 2em;" name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
     <ion-item *ngIf="favs?.length == 0">
-       <ion-label>
+      <ion-label>
         <span>Sie haben noch keine Favoriten</span>
       </ion-label>
     </ion-item>
     <ion-item class="space">
-      </ion-item>
+    </ion-item>
   </ion-list>
 
   <ion-list inset="true">
