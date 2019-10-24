@@ -42,7 +42,7 @@ export class Tab1Page implements OnInit {
     } else {
       this.uid = this.authService.afAuth.auth.currentUser.uid
     }
-    this.getTime()
+    //this.getTime()
     this.loadFavs()
     //setInterval(()=> { this.ionViewDidEnter() }, 1 * 1000); //Machen wir zur Präsention wieder rein sonst ist die DB gefickt
   }

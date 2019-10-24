@@ -21,14 +21,23 @@ export class AuthFormComponent implements OnInit {
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController
   ) {
-    this.authForm = this.formBuilder.group({
-      name: ['', Validators.compose([Validators.required])],
-      email: ['', Validators.compose([Validators.required, Validators.email])],
-      password: ['', Validators.minLength(6)]
-    });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.isLoginPage) {
+      this.authForm = this.formBuilder.group({
+        name: ['', Validators.minLength(0)],
+        email: ['', Validators.compose([Validators.required, Validators.email])],
+        password: ['', Validators.minLength(6)]
+      });
+    } else {
+      this.authForm = this.formBuilder.group({
+        name: ['', Validators.compose([Validators.required])],
+        email: ['', Validators.compose([Validators.required, Validators.email])],
+        password: ['', Validators.minLength(6)]
+      });
+    }
+   }
 
   submitCredentials(authForm: FormGroup): void {
     if (!authForm.valid) {
@@ -36,7 +45,7 @@ export class AuthFormComponent implements OnInit {
     } else {
       this.showLoading();
       var name: string;
-      if(!this.isLoginPage){
+      if (!this.isLoginPage) {
         name = authForm.value.name
       } else {
         name = ""
