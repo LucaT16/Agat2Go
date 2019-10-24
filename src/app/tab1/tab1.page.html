@@ -49,7 +49,7 @@
     <br>
     <ion-item *ngFor="let item of items" (click)="toDetailPage(item)">
       <ion-icon slot="end" color="medium" name="arrow-forward"></ion-icon>
-      <ion-avatar slot="start">
+      <ion-avatar style="size: 120%" slot="start">
         <img src="./assets/{{item.payload.doc.data().name}}.jpg">
       </ion-avatar>
       <ion-label>
