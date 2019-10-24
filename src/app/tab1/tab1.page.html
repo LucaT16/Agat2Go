@@ -24,8 +24,6 @@
 </ion-header>
 
 <ion-content>
-
-    
   <ion-list inset="true">
     <ion-list-header style="box-shadow: 0px 2px 5px silver;">
       <ion-label style="font-size:12px">Favoriten</ion-label>
@@ -35,7 +33,7 @@
       <ion-icon slot="end" color="medium" name="trash" (click)="removeFav(item.payload.doc.id)"></ion-icon>
       <ion-icon slot="end" color="medium" name="add-circle-outline"  (click)="addFavToCart(favs.indexOf(item))"></ion-icon>
       <ion-label>
-        <span>{{item.payload.doc.data().name}}, 
+        <span>{{item.payload.doc.data().name}}<span *ngIf="item.payload.doc.data().extra[0]?.name">, </span> 
           <b *ngIf="item.payload.doc.data().extra[0]?.name">{{item.payload.doc.data().extra[0].name}}</b></span>
         <h4>{{item.payload.doc.data().totalprice.toFixed(2)}} €</h4>
       </ion-label>
@@ -45,12 +43,9 @@
   </ion-list>
 
   <ion-list inset="true">
- 
     <ion-list-header style="box-shadow: 0px 2px 5px silver;">
       <ion-label style="font-size:12px">Produkte</ion-label>
-     
     </ion-list-header>
- 
     <br>
     <ion-item *ngFor="let item of items" (click)="toDetailPage(item)">
       <ion-icon slot="end" color="medium" name="arrow-forward"></ion-icon>
@@ -63,7 +58,6 @@
         <h4>{{item.payload.doc.data().price.toFixed(2)}} €</h4>
         <br>
       </ion-label>
-
     </ion-item>
   </ion-list>
 </ion-content>
