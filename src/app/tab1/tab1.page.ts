@@ -15,7 +15,7 @@ import { ProfilePage } from '../profile/profile.page';
 export class Tab1Page implements OnInit {
 
   items: Array<any>;
-  favs: Array<any>;
+  favs: Array<any> = [];
   prodId: string;
   uid: String;
   badgeCount = 0;
