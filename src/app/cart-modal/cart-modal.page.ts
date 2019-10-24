@@ -81,7 +81,7 @@ export class CartModalPage implements OnInit {
   getTime() {
     var d = new Date().toLocaleString("en-EN", {timeZone: "Europe/Berlin"});
     var date = new Date(d)
-    var min = date.getMinutes()
+    var min = date.getMinutes() + 10
     var hours = date.getHours()
     this.currentTime = hours + ":" + min
   }
