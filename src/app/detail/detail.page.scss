@@ -17,3 +17,26 @@
 .radio-icon.ion-checkmark:before {
     content: "";
 }
+
+h2{
+  font-weight: 100;
+  letter-spacing: 1.5px;
+  font-family: Cubano;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+h3{
+  font-weight: 100;
+  letter-spacing: 1.5px;
+  font-family: Cubano;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+ion-content{
+  font-family: Cubano;
+}
+
+ion-card{
+  font-family: Cubano;
+  letter-spacing: 1.5px;
+}
