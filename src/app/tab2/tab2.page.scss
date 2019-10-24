@@ -27,3 +27,11 @@
     font-family: Cubano;
     color: rgba(0, 0, 0, 0.9);
   }
+
+  .center {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    height: 2em;
+    width: 2em;
+  }
