@@ -13,7 +13,7 @@ export class AuthFormComponent implements OnInit {
   public authForm: FormGroup;
   @Input() actionButtonText: string;
   @Input() isPasswordResetPage = false;
-  @Input() isLoginPage = false;
+  @Input() dontShowName = false;
   @Output() formSubmitted = new EventEmitter<any>();
 
   constructor(
@@ -24,7 +24,7 @@ export class AuthFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.isLoginPage) {
+    if (this.dontShowName) {
       this.authForm = this.formBuilder.group({
         name: ['', Validators.minLength(0)],
         email: ['', Validators.compose([Validators.required, Validators.email])],
@@ -45,7 +45,7 @@ export class AuthFormComponent implements OnInit {
     } else {
       this.showLoading();
       var name: string;
-      if (!this.isLoginPage) {
+      if (!this.dontShowName) {
         name = authForm.value.name
       } else {
         name = ""

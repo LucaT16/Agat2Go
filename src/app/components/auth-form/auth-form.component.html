@@ -1,6 +1,6 @@
 <form [formGroup]="authForm">
 
-  <ion-item *ngIf="!isLoginPage">
+  <ion-item *ngIf="!dontShowName">
     <ion-label position="stacked">Name</ion-label>
     <ion-input formControlName="name" type="name" placeholder="Dein Name" [class.invalid]="!authForm.controls['name'].valid &&
       authForm.controls['name'].touched">
