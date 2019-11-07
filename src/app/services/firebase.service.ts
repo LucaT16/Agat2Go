@@ -5,6 +5,7 @@ import 'firebase/storage';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from './auth.service';
 import { ProfileService } from './profile.service';
+import { UserProfile } from '../models/user';
 
 
 
@@ -13,7 +14,7 @@ import { ProfileService } from './profile.service';
 })
 export class FirebaseService {
 
-  public user;
+  public user: UserProfile;
   private snapshotChangesSubscription: any;
   public userId: string;
 
@@ -74,6 +75,15 @@ export class FirebaseService {
         resolve(snapshots)
       })
     })
+  }
+
+  getBonuscardStatus(){
+    this.profileService.getUserProfile().then(profile$ => {
+      profile$.subscribe(userProfile => {
+        this.user = userProfile;
+      });
+    });
+    return this.user.bonuscard
   }
 
   unsubscribeOnLogOut(){

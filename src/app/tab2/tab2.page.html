@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-        <img src="./assets/logo_a_trans.png" class="center">
+      <img src="./assets/logo_a_trans.png" class="center">
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,55 +12,55 @@
       <ion-card-title>Deine Bonuskarte</ion-card-title>
     </ion-card-header>
   </ion-card>
-  <!-- <img src="/assets/jenny.PNG" alt="" />-->
   <ion-grid>
     <ion-row>
       <ion-col>
-        <div><img src="/assets/logo_trans.PNG" alt="" /></div>
+        <div *ngIf="bonuscounter>=1" ><img src="/assets/logo_trans.PNG" alt="" /></div>
+        <div *ngIf="bonuscounter<1" ><img src="/assets/white.jpg" alt="" /></div>
       </ion-col>
       <ion-col>
-        <div><img src="/assets/logo_trans.PNG" alt="" /></div>
+        <div *ngIf="bonuscounter>=2" ><img src="/assets/logo_trans.PNG" alt="" /></div>
+        <div *ngIf="bonuscounter<2" ><img src="/assets/white.jpg" alt="" /></div>      
       </ion-col>
       <ion-col>
-        <div><img src="/assets/logo_trans.PNG" alt="" /></div>
+        <div *ngIf="bonuscounter>=3" ><img src="/assets/logo_trans.PNG" alt="" /></div>
+        <div *ngIf="bonuscounter<3" ><img src="/assets/white.jpg" alt="" /></div>      
       </ion-col>
     </ion-row>
-  </ion-grid>
-
-  <ion-grid>
     <ion-row class="ion-align-items-center">
       <ion-col>
-        <div><img src="/assets/logo_trans.PNG" alt="" /></div>
+        <div *ngIf="bonuscounter>=4" ><img src="/assets/logo_trans.PNG" alt="" /></div>
+        <div *ngIf="bonuscounter<4" ><img src="/assets/white.jpg" alt="" /></div>      
       </ion-col>
       <ion-col>
-        <div><img src="/assets/logo_trans.PNG" alt="" /></div>
+        <div *ngIf="bonuscounter>=5" ><img src="/assets/logo_trans.PNG" alt="" /></div>
+        <div *ngIf="bonuscounter<5" ><img src="/assets/white.jpg" alt="" /></div>      
       </ion-col>
       <ion-col>
-        <div><img src="/assets/logo_trans.PNG" alt="" /></div>
+        <div *ngIf="bonuscounter>=6" ><img src="/assets/logo_trans.PNG" alt="" /></div>
+        <div *ngIf="bonuscounter<6" ><img src="/assets/white.jpg" alt="" /></div>      
       </ion-col>
     </ion-row>
-  </ion-grid>
-
-  <ion-grid>
     <ion-row class="ion-align-items-center">
       <ion-col>
-        <div><img src="/assets/logo_trans.PNG" alt="" /></div>
+        <div *ngIf="bonuscounter>=7" ><img src="/assets/logo_trans.PNG" alt="" /></div>
+        <div *ngIf="bonuscounter<7" ><img src="/assets/white.jpg" alt="" /></div>      
       </ion-col>
       <ion-col>
-        <div><img src="/assets/logo_trans.PNG" alt="" /></div>
+        <div *ngIf="bonuscounter>=8" ><img src="/assets/logo_trans.PNG" alt="" /></div>
+        <div *ngIf="bonuscounter<8" ><img src="/assets/white.jpg" alt="" /></div>     
       </ion-col>
       <ion-col>
-        <div><img src="/assets/white.jpg" alt="" /></div>
+        <div *ngIf="bonuscounter>=9" ><img src="/assets/logo_trans.PNG" alt="" /></div>
+        <div *ngIf="bonuscounter<9" ><img src="/assets/white.jpg" alt="" /></div>      
       </ion-col>
     </ion-row>
-  </ion-grid>
-
-  <ion-grid>
     <ion-row class="ion-align-items-center">
       <ion-col>
       </ion-col>
       <ion-col size="4">
-        <div><img src="/assets/white.jpg" alt="" /></div>
+        <div *ngIf="bonuscounter>=10" ><img src="/assets/logo_trans.PNG" alt="" /></div>
+        <div *ngIf="bonuscounter<10" ><img src="/assets/white.jpg" alt="" /></div>
       </ion-col>
       <ion-col>
       </ion-col>

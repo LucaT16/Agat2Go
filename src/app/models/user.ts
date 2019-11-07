@@ -7,4 +7,5 @@ export interface UserCredential {
 export interface UserProfile {
   email: string;
   name: string;
+  bonuscard: number;
 }

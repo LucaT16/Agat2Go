@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FirebaseService } from '../services/firebase.service';
 
 @Component({
   selector: 'app-tab2',
@@ -7,6 +8,23 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
-  constructor() {}
+  bonuscounter = 1;
+
+  constructor(
+    public firebaseService: FirebaseService,
+  ) { }
+
+  ngOnInit() {
+    this.getStatus()
+  }
+
+  ionViewWillEnter(){
+    this.getStatus()
+  }
+
+  getStatus() {
+    this.bonuscounter = this.firebaseService.user.bonuscard
+
+  }
 
 }
