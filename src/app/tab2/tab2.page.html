@@ -7,6 +7,9 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-card class="welcome-card">
     <ion-card-header>
       <ion-card-title>Deine Bonuskarte</ion-card-title>
@@ -15,55 +18,56 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <div *ngIf="bonuscounter>=1" ><img src="/assets/logo_trans.PNG" alt="" /></div>
-        <div *ngIf="bonuscounter<1" ><img src="/assets/white.jpg" alt="" /></div>
+        <div *ngIf="bonuscounter>=1"><img src="/assets/logo_trans.PNG" alt="" /></div>
+        <div *ngIf="bonuscounter<1"><img src="/assets/white.jpg" alt="" /></div>
       </ion-col>
       <ion-col>
-        <div *ngIf="bonuscounter>=2" ><img src="/assets/logo_trans.PNG" alt="" /></div>
-        <div *ngIf="bonuscounter<2" ><img src="/assets/white.jpg" alt="" /></div>      
+        <div *ngIf="bonuscounter>=2"><img src="/assets/logo_trans.PNG" alt="" /></div>
+        <div *ngIf="bonuscounter<2"><img src="/assets/white.jpg" alt="" /></div>
       </ion-col>
       <ion-col>
-        <div *ngIf="bonuscounter>=3" ><img src="/assets/logo_trans.PNG" alt="" /></div>
-        <div *ngIf="bonuscounter<3" ><img src="/assets/white.jpg" alt="" /></div>      
-      </ion-col>
-    </ion-row>
-    <ion-row class="ion-align-items-center">
-      <ion-col>
-        <div *ngIf="bonuscounter>=4" ><img src="/assets/logo_trans.PNG" alt="" /></div>
-        <div *ngIf="bonuscounter<4" ><img src="/assets/white.jpg" alt="" /></div>      
-      </ion-col>
-      <ion-col>
-        <div *ngIf="bonuscounter>=5" ><img src="/assets/logo_trans.PNG" alt="" /></div>
-        <div *ngIf="bonuscounter<5" ><img src="/assets/white.jpg" alt="" /></div>      
-      </ion-col>
-      <ion-col>
-        <div *ngIf="bonuscounter>=6" ><img src="/assets/logo_trans.PNG" alt="" /></div>
-        <div *ngIf="bonuscounter<6" ><img src="/assets/white.jpg" alt="" /></div>      
+        <div *ngIf="bonuscounter>=3"><img src="/assets/logo_trans.PNG" alt="" /></div>
+        <div *ngIf="bonuscounter<3"><img src="/assets/white.jpg" alt="" /></div>
       </ion-col>
     </ion-row>
     <ion-row class="ion-align-items-center">
       <ion-col>
-        <div *ngIf="bonuscounter>=7" ><img src="/assets/logo_trans.PNG" alt="" /></div>
-        <div *ngIf="bonuscounter<7" ><img src="/assets/white.jpg" alt="" /></div>      
+        <div *ngIf="bonuscounter>=4"><img src="/assets/logo_trans.PNG" alt="" /></div>
+        <div *ngIf="bonuscounter<4"><img src="/assets/white.jpg" alt="" /></div>
       </ion-col>
       <ion-col>
-        <div *ngIf="bonuscounter>=8" ><img src="/assets/logo_trans.PNG" alt="" /></div>
-        <div *ngIf="bonuscounter<8" ><img src="/assets/white.jpg" alt="" /></div>     
+        <div *ngIf="bonuscounter>=5"><img src="/assets/logo_trans.PNG" alt="" /></div>
+        <div *ngIf="bonuscounter<5"><img src="/assets/white.jpg" alt="" /></div>
       </ion-col>
       <ion-col>
-        <div *ngIf="bonuscounter>=9" ><img src="/assets/logo_trans.PNG" alt="" /></div>
-        <div *ngIf="bonuscounter<9" ><img src="/assets/white.jpg" alt="" /></div>      
+        <div *ngIf="bonuscounter>=6"><img src="/assets/logo_trans.PNG" alt="" /></div>
+        <div *ngIf="bonuscounter<6"><img src="/assets/white.jpg" alt="" /></div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col>
+        <div *ngIf="bonuscounter>=7"><img src="/assets/logo_trans.PNG" alt="" /></div>
+        <div *ngIf="bonuscounter<7"><img src="/assets/white.jpg" alt="" /></div>
+      </ion-col>
+      <ion-col>
+        <div *ngIf="bonuscounter>=8"><img src="/assets/logo_trans.PNG" alt="" /></div>
+        <div *ngIf="bonuscounter<8"><img src="/assets/white.jpg" alt="" /></div>
+      </ion-col>
+      <ion-col>
+        <div *ngIf="bonuscounter>=9"><img src="/assets/logo_trans.PNG" alt="" /></div>
+        <div *ngIf="bonuscounter<9"><img src="/assets/white.jpg" alt="" /></div>
       </ion-col>
     </ion-row>
     <ion-row class="ion-align-items-center">
       <ion-col>
       </ion-col>
       <ion-col size="4">
-        <div *ngIf="bonuscounter>=10" ><img src="/assets/logo_trans.PNG" alt="" /></div>
-        <div *ngIf="bonuscounter<10" ><img src="/assets/white.jpg" alt="" /></div>
+        <div *ngIf="bonuscounter>=10"><img src="/assets/logo_trans.PNG" alt="" /></div>
+        <div *ngIf="bonuscounter<10"><img src="/assets/white.jpg" alt="" /></div>
       </ion-col>
       <ion-col>
       </ion-col>
     </ion-row>
   </ion-grid>
+  <ion-button *ngIf="bonuscounter>=10" size="block" (click)="createCoupon()">Einlösen</ion-button>
 </ion-content>

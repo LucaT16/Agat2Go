@@ -30,7 +30,7 @@ export class AuthService {
     );
     await this.firestore
       .doc(`user/${newUserCredential.user.uid}`)
-      .set({ email, name});
+      .set({ email, name, bonuscard: 0, hatGutschein: false});
     return newUserCredential;
   }
 

@@ -86,6 +86,15 @@ export class FirebaseService {
     return this.user.bonuscard
   }
 
+  getGutscheinStatus(){
+    this.profileService.getUserProfile().then(profile$ => {
+      profile$.subscribe(userProfile => {
+        this.user = userProfile;
+      });
+    });
+    return this.user.hatGutschein
+  }
+
   unsubscribeOnLogOut(){
     //remember to unsubscribe from the snapshotChanges
     this.snapshotChangesSubscription.unsubscribe();
@@ -133,6 +142,18 @@ export class FirebaseService {
     })
   }
 
+  resetBonuscardStatus(){
+    return new Promise<any>((resolve, reject) => {
+      this.afs.collection('user').doc(this.userId).update({
+        bonuscard: 0
+      })
+      .then(
+        res => resolve(res),
+        err => reject(err)
+      )
+   })
+  }
+
   createCart(coffee, extras, totalprice){
     return new Promise<any>((resolve, reject) => {
       this.afs.collection('user').doc(this.userId).collection('carts').add({
@@ -146,6 +167,30 @@ export class FirebaseService {
         err => reject(err)
       )
     })
+  }
+
+  createCoupon(){
+    return new Promise<any>((resolve, reject) => {
+      this.afs.collection('user').doc(this.userId).update({
+        hatGutschein: true
+      })
+      .then(
+        res => resolve(res),
+        err => reject(err)
+      )
+   })
+  }
+
+  resetCoupon(){
+    return new Promise<any>((resolve, reject) => {
+      this.afs.collection('user').doc(this.userId).update({
+        hatGutschein: false
+      })
+      .then(
+        res => resolve(res),
+        err => reject(err)
+      )
+   })
   }
 
   createFav(coffee, extras, totalprice){
@@ -164,14 +209,15 @@ export class FirebaseService {
     })
   }
 
-  createOrder(items, time) {
+  createOrder(items, time, totalprice) {
     return new Promise<any>((resolve, reject) => {
       // let currentUser = firebase.auth().currentUser;
       this.afs.collection('order').add({
         products: items,
         user: this.user.name,
         userId: this.userId,
-        time: time
+        time: time,
+        totalprice: totalprice
       })
       .then(
         res => resolve(res),

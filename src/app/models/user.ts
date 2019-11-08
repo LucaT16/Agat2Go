@@ -8,4 +8,5 @@ export interface UserProfile {
   email: string;
   name: string;
   bonuscard: number;
+  hatGutschein: boolean;
 }
