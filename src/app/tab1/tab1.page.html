@@ -59,8 +59,7 @@
       <ion-label style="font-size:12px">Produkte</ion-label>
     </ion-list-header>
     <br>
-    <ion-item *ngFor="let item of items" (click)="toDetailPage(item)">
-      <ion-icon slot="end" color="medium" name="arrow-forward"></ion-icon>
+    <ion-item *ngFor="let item of items" [routerLink]="'/detail/' + item.payload.doc.id">
       <ion-avatar style="size: 120%" slot="start">
         <img src="./assets/{{item.payload.doc.data().name}}.jpg">
       </ion-avatar>

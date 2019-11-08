@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
-import { Router } from '@angular/router';
-import { DataService } from '../services/data.service';
 import { ModalController, ToastController, AlertController } from '@ionic/angular';
 import { CartModalPage } from '../cart-modal/cart-modal.page';
 import { AuthService } from '../services/auth.service';
 import { ProfilePage } from '../profile/profile.page';
+import { Subscription } from 'rxjs';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page implements OnInit {
+export class Tab1Page implements OnInit, OnDestroy, OnEnter {
 
   items: Array<any>;
   favs: Array<any>;
@@ -20,19 +20,20 @@ export class Tab1Page implements OnInit {
   uid: String;
   badgeCount = 0;
   agataClosed = false;
+  private subscription: Subscription;
+
 
   constructor(
     public firebaseService: FirebaseService,
-    private router: Router,
-    private data: DataService,
     public modalController: ModalController,
     private authService: AuthService,
     public toastController: ToastController,
-    public alertController: AlertController
-    ) { }
+    public alertController: AlertController,
+    public router: Router
+  ) { }
 
 
-  ngOnInit() {
+  public async ngOnInit(): Promise<void> {
     this.firebaseService.getProducts()
       .then(result => {
         this.items = result;
@@ -44,10 +45,25 @@ export class Tab1Page implements OnInit {
     }
     //this.getTime()
     this.loadFavs()
-    //setInterval(()=> { this.ionViewDidEnter() }, 1 * 1000); //Machen wir zur Präsention wieder rein sonst ist die DB gefickt
+
+    await this.onEnter();
+
+    this.subscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd && event.url === '/tabs/tab1') {
+        this.onEnter();
+      }
+    });
   }
 
-  ionViewDidEnter() {
+  public async onEnter(): Promise<void> {
+    this.ionViewWillEnter()
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  ionViewWillEnter() {
     this.loadFavs()
     this.loadCart()
   }
@@ -59,17 +75,11 @@ export class Tab1Page implements OnInit {
       })
   }
 
-  removeFav(id){
+  removeFav(id) {
     this.firebaseService.deleteFav(id)
-    .then(result => {
-      this.loadFavs()
-    })
-  }
-
-  toDetailPage(item) {
-    this.prodId = item.payload.doc.data().id;
-    this.data.changeMessage(this.prodId);
-    this.router.navigate(["/detail"]);
+      .then(result => {
+        this.loadFavs()
+      })
   }
 
   addFavToCart(index) {
@@ -81,24 +91,24 @@ export class Tab1Page implements OnInit {
 
   loadCart() {
     this.firebaseService.getCart()
-    .then(result => {
-      if(this.badgeCount != result.length) {
-        this.badgeCount = result.length
-      }
-    })
+      .then(result => {
+        if (this.badgeCount != result.length) {
+          this.badgeCount = result.length
+        }
+      })
   }
 
   getTime() {
-    var d = new Date().toLocaleString("en-EN", {timeZone: "Europe/Berlin"});
+    var d = new Date().toLocaleString("en-EN", { timeZone: "Europe/Berlin" });
     var date = new Date(d)
     var timeString = date.toTimeString()
 
-    if(timeString = "17:30:00 GMT+0200") {
+    if (timeString == "17:30:00 GMT+0200") {
       this.agataClosed = true;
     }
   }
 
-  closedNotification(){
+  closedNotification() {
     this.presentAlert("Agata hat geschlossen!", "Wir haben leider schon geschlossen. Schau doch einfach nochmal morgen vorbei!", ['OK'])
   }
 
@@ -125,7 +135,7 @@ export class Tab1Page implements OnInit {
       component: CartModalPage
     });
     modal.onDidDismiss().then(() => {
-      this.ionViewDidEnter()
+      this.loadCart()
     });
     return await modal.present();
   }
@@ -136,4 +146,8 @@ export class Tab1Page implements OnInit {
     });
     return await modal.present();
   }
+}
+
+export interface OnEnter {
+  onEnter(): Promise<void>;
 }

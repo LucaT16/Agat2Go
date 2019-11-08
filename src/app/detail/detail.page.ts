@@ -1,9 +1,9 @@
-import { ModalController, AlertController, ToastController } from '@ionic/angular';
+import { ModalController, AlertController, ToastController, NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
-import { Router } from '@angular/router';
-import { DataService } from '../services/data.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CartModalPage } from '../cart-modal/cart-modal.page';
+
 
 @Component({
   selector: 'app-detail',
@@ -15,11 +15,12 @@ export class DetailPage implements OnInit {
 
   constructor(
     public firebaseService: FirebaseService,
-    private router: Router,
     public modalController: ModalController,
     public alertController: AlertController,
-    private data: DataService,
-    public toastController: ToastController
+    public toastController: ToastController,
+    public route: ActivatedRoute,
+    public router: Router,
+    public navCtr: NavController
     ) {}
 
   item = new Item();
@@ -31,11 +32,10 @@ export class DetailPage implements OnInit {
   lastExtraPrice = 0;
   countFavs = 0;
 
-  ngOnInit() {
-    this.data.currentMessage.subscribe(prodId => this.prodId = prodId)
-    if(this.prodId == "no id"){
-      this.router.navigate(["/tabs/tab1"]);
-    }
+  ngOnInit() {}
+
+  ionViewWillEnter(){
+    this.prodId = this.route.snapshot.paramMap.get('id');
     this.firebaseService.getProduct(this.prodId)
     .then(result => {
       this.item = result.payload.data();
@@ -46,7 +46,6 @@ export class DetailPage implements OnInit {
       this.extras = result;
     })
     this.loadFavs()
-
   }
 
   async presentToast(message) {
