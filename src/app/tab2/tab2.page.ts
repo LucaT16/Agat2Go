@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { LoadingController, ToastController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -11,10 +11,12 @@ export class Tab2Page {
 
   bonuscounter = 0;
   public loading: HTMLIonLoadingElement;
+  hatGutschein = false;
 
   constructor(
     public firebaseService: FirebaseService,
     public toastController: ToastController,
+    public alertController: AlertController,
     private loadingCtrl: LoadingController
   ) { }
 
@@ -22,31 +24,37 @@ export class Tab2Page {
     this.getStatus()
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.getStatus()
   }
 
   getStatus() {
     this.bonuscounter = this.firebaseService.user.bonuscard
+    this.hatGutschein = this.firebaseService.getGutscheinStatus()
   }
 
   createCoupon() {
-    this.showLoading()
-    this.firebaseService.resetBonuscardStatus()
-    setTimeout(() => {
-      this.getStatus()
-      this.hideLoading()
-      this.firebaseService.createCoupon()
-      this.presentToast('Gutschein zum Warenkorb hinzugefügt!')
-    }, 1000);
+    if (!this.hatGutschein) {
+      this.showLoading()
+      this.firebaseService.resetBonuscardStatus()
+      setTimeout(() => {
+        this.getStatus()
+        this.hideLoading()
+        this.firebaseService.createCoupon()
+        this.presentToast('Gutschein zum Warenkorb hinzugefügt!')
+      }, 1000);
+    } else {
+      this.presentAlert("Warte einen Moment!", "Du hast bereits einen Gutschein. Bitte verwende erst diesen bevor du einen neuen einlöst.", ["OK"])
+    }
+
   }
 
   doRefresh(event) {
     setTimeout(() => {
       this.getStatus()
-      event.target.complete()      
+      event.target.complete()
     }, 1000);
-    
+
   }
 
   async showLoading(): Promise<void> {
@@ -64,6 +72,16 @@ export class Tab2Page {
       duration: 2000
     });
     toast.present();
+  }
+
+  async presentAlert(header, message, buttons) {
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: buttons
+    });
+
+    await alert.present();
   }
 
 }
