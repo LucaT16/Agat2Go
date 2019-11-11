@@ -23,6 +23,7 @@ export class CartModalPage implements OnInit {
   ordered = false;
   timestamp: string;
   timeSet = false;
+  hasProducts= false;
   currentTime: string;
   checked = false
 
@@ -33,6 +34,7 @@ export class CartModalPage implements OnInit {
   }
 
   loadCart() {
+    this.formattedItems = []
     this.totalprice = 0;
     this.firebaseService.getCart()
       .then(result => {
@@ -44,6 +46,13 @@ export class CartModalPage implements OnInit {
             this.couponvalue = +element.payload.doc.data().totalprice;
           }
         });
+        if(this.formattedItems.length > 0) {
+          this.hasProducts = true
+        } else {
+          this.hasProducts = false
+        }
+        console.log("Produkte: " + this.hasProducts)
+        console.log(this.formattedItems.length)
       })
       this.hatGutschein = this.firebaseService.getGutscheinStatus()
   }
@@ -105,6 +114,7 @@ export class CartModalPage implements OnInit {
   setTime($event) {
     this.timeSet = true;
     this.timestamp = $event.detail.value;
+    console.log(this.timeSet)
   }
 
   async closeModal() {

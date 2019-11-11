@@ -16,6 +16,8 @@ import { UserProfile } from '../models/user';
 export class ProfileService {
   private userProfile: AngularFirestoreDocument<UserProfile>;
   public currentUser: firebase.User;
+  public userId: string;
+
   constructor(
     private firestore: AngularFirestore,
     private authService: AuthService
@@ -24,6 +26,7 @@ export class ProfileService {
   async getUserProfile(): Promise<Observable<UserProfile>> {
     const user: firebase.User = await this.authService.getUser();
     this.currentUser = user;
+    this.userId = user.uid;
     this.userProfile = this.firestore.doc(`user/${user.uid}`);
     return this.userProfile.valueChanges();
   }

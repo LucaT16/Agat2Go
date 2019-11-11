@@ -27,10 +27,11 @@ export class FirebaseService {
     this.profileService.getUserProfile().then(profile$ => {
       profile$.subscribe(userProfile => {
         this.user = userProfile;
+        console.log(userProfile)
       });
     });
-    this.userId =  "ykcNl10gYmOnrsyqHLfkHnZxC5E3";  //this.authService.userId;
-  }
+    this.userId =  this.profileService.userId;
+  }   
 
   getProducts(){
     return new Promise<any>((resolve, reject) => {
@@ -61,7 +62,7 @@ export class FirebaseService {
 
   getFavs(){
     return new Promise<any>((resolve, reject) => {
-      this.afs.collection('user').doc(this.userId).collection('favs').snapshotChanges()
+      this.afs.collection('user').doc(this.profileService.userId).collection('favs').snapshotChanges()
       .subscribe(snapshots => {
         resolve(snapshots)
       })
@@ -70,7 +71,7 @@ export class FirebaseService {
 
   getCart(){
     return new Promise<any>((resolve, reject) => {
-      this.afs.collection('user').doc(this.userId).collection('carts').snapshotChanges()
+      this.afs.collection('user').doc(this.profileService.userId).collection('carts').snapshotChanges()
       .subscribe(snapshots => {
         resolve(snapshots)
       })
@@ -124,7 +125,7 @@ export class FirebaseService {
 
   deleteItemFromCart(itemId) {
     return new Promise<any>((resolve, reject) => {
-       this.afs.collection('user').doc(this.userId).collection('carts').doc(itemId).delete()
+       this.afs.collection('user').doc(this.profileService.userId).collection('carts').doc(itemId).delete()
        .then(
          res => resolve(res),
          err => reject(err)
@@ -134,7 +135,7 @@ export class FirebaseService {
 
   deleteFav(itemId) {
     return new Promise<any>((resolve, reject) => {
-       this.afs.collection('user').doc(this.userId).collection('favs').doc(itemId).delete()
+       this.afs.collection('user').doc(this.profileService.userId).collection('favs').doc(itemId).delete()
        .then(
          res => resolve(res),
          err => reject(err)
@@ -144,7 +145,7 @@ export class FirebaseService {
 
   resetBonuscardStatus(){
     return new Promise<any>((resolve, reject) => {
-      this.afs.collection('user').doc(this.userId).update({
+      this.afs.collection('user').doc(this.profileService.userId).update({
         bonuscard: 0
       })
       .then(
@@ -156,7 +157,7 @@ export class FirebaseService {
 
   createCart(coffee, extras, totalprice){
     return new Promise<any>((resolve, reject) => {
-      this.afs.collection('user').doc(this.userId).collection('carts').add({
+      this.afs.collection('user').doc(this.profileService.userId).collection('carts').add({
         name: coffee.name,
         price: coffee.price,
         totalprice: totalprice,
@@ -171,7 +172,7 @@ export class FirebaseService {
 
   createCoupon(){
     return new Promise<any>((resolve, reject) => {
-      this.afs.collection('user').doc(this.userId).update({
+      this.afs.collection('user').doc(this.profileService.userId).update({
         hatGutschein: true
       })
       .then(
@@ -183,7 +184,7 @@ export class FirebaseService {
 
   resetCoupon(){
     return new Promise<any>((resolve, reject) => {
-      this.afs.collection('user').doc(this.userId).update({
+      this.afs.collection('user').doc(this.profileService.userId).update({
         hatGutschein: false
       })
       .then(
@@ -196,7 +197,7 @@ export class FirebaseService {
   createFav(coffee, extras, totalprice){
     return new Promise<any>((resolve, reject) => {
       // let currentUser = firebase.auth().currentUser;
-      this.afs.collection('user').doc(this.userId).collection('favs').add({
+      this.afs.collection('user').doc(this.profileService.userId).collection('favs').add({
         name: coffee.name,
         price: coffee.price,
         totalprice: totalprice,
@@ -215,7 +216,7 @@ export class FirebaseService {
       this.afs.collection('order').add({
         products: items,
         user: this.user.name,
-        userId: this.userId,
+        userId: this.profileService.userId,
         time: time,
         totalprice: totalprice
       })

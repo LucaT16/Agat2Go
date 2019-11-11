@@ -54,8 +54,8 @@
   <ion-row>
     <ion-col offset-4>
       <section>
-        <ion-button *ngIf="!timeSet" size="block" disabled>Bestellen</ion-button>
-        <ion-button *ngIf="timeSet" size="block" (click)="order()">Bestellen</ion-button>
+        <ion-button *ngIf="(!timeSet || !hasProducts)" size="block" disabled>Bestellen</ion-button>
+        <ion-button *ngIf="(timeSet && hasProducts)" size="block" (click)="order()">Bestellen</ion-button>
       </section>
     </ion-col>
   </ion-row>
