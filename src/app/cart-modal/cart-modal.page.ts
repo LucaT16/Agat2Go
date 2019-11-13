@@ -52,8 +52,6 @@ export class CartModalPage implements OnInit {
         } else {
           this.hasProducts = false
         }
-        console.log("Produkte: " + this.hasProducts)
-        console.log(this.formattedItems.length)
       })
       this.hatGutschein = this.firebaseService.getGutscheinStatus()
   }

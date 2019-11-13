@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ProfileService } from 'src/app/services/profile.service';
 import { AlertController, ModalController } from '@ionic/angular';
 import { UserProfile } from 'src/app/models/user';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 @Component({
   selector: 'app-profile',
@@ -18,6 +19,7 @@ export class ProfilePage implements OnInit {
     private profileService: ProfileService,
     private alertCtrl: AlertController,
     private modalController: ModalController,
+    private nativeStorage: NativeStorage
   ) {}
 
   ngOnInit() {
@@ -30,6 +32,7 @@ export class ProfilePage implements OnInit {
 
   async logOut(): Promise<void> {
     await this.authService.logout();
+    this.nativeStorage.clear()
     this.closeModal()
     this.router.navigateByUrl('login');
   }
