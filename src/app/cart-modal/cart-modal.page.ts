@@ -25,7 +25,8 @@ export class CartModalPage implements OnInit {
   timeSet = false;
   hasProducts= false;
   currentTime: string;
-  checked = false
+  checked = false;
+  toGo = true;
 
   ngOnInit() {
     this.loadCart()
@@ -58,7 +59,7 @@ export class CartModalPage implements OnInit {
   }
 
   order() {
-    this.firebaseService.createOrder(this.formattedItems, this.timestamp, this.totalprice.toFixed(2))
+    this.firebaseService.createOrder(this.formattedItems, this.timestamp, this.totalprice.toFixed(2), this.toGo)
       .then(result => {
         console.log('Bestellung wurde aufgegeben')
         this.items.forEach(element => {
@@ -85,6 +86,10 @@ export class CartModalPage implements OnInit {
       this.totalprice += this.couponvalue
       this.isUsingGutschein = false
     }
+  }
+
+  changeToGo() {
+    this.toGo = !this.toGo;
   }
 
   removeItemFromCart(id) {

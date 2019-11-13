@@ -210,7 +210,7 @@ export class FirebaseService {
     })
   }
 
-  createOrder(items, time, totalprice) {
+  createOrder(items, time, totalprice, toGo) {
     return new Promise<any>((resolve, reject) => {
       // let currentUser = firebase.auth().currentUser;
       this.afs.collection('order').add({
@@ -218,7 +218,8 @@ export class FirebaseService {
         user: this.user.name,
         userId: this.profileService.userId,
         time: time,
-        totalprice: totalprice
+        totalprice: totalprice,
+        toGo: toGo
       })
       .then(
         res => resolve(res),
