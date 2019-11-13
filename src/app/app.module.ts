@@ -14,6 +14,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { DataService } from './services/data.service';
 import { ProfilePage } from './profile/profile.page';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 @NgModule({
   declarations: [AppComponent,CartModalPage, ProfilePage],
@@ -28,6 +29,7 @@ import { ProfilePage } from './profile/profile.page';
   providers: [
     StatusBar,
     SplashScreen,
+    NativeStorage,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AngularFirestoreModule,
     AngularFireAuth,

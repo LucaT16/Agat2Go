@@ -8,7 +8,6 @@ import { IonicModule } from '@ionic/angular';
 import { LoginPage } from './login.page';
 import { AuthModule } from '../services/auth.module';
 
-
 const routes: Routes = [
   {
     path: '',
