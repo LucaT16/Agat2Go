@@ -12,6 +12,7 @@ export class Tab2Page {
   bonuscounter = 0;
   public loading: HTMLIonLoadingElement;
   hatGutschein = false;
+  emo = "&#x1F60A";
 
   constructor(
     public firebaseService: FirebaseService,
