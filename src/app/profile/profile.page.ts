@@ -39,7 +39,7 @@ export class ProfilePage implements OnInit {
 
   async updateName(): Promise<void> {
     const alert = await this.alertCtrl.create({
-      subHeader: 'Dein Name',
+      header: 'Ändere deinen Namen',
       inputs: [
         {
           type: 'text',
@@ -63,6 +63,7 @@ export class ProfilePage implements OnInit {
 
   async updateEmail(): Promise<void> {
     const alert = await this.alertCtrl.create({
+      header: 'Ändere deine Email-Adresse',
       inputs: [
         { type: 'text', name: 'newEmail', placeholder: 'Deine neue Email-Addresse' },
         { name: 'password', placeholder: 'Dein Passwort', type: 'password' }
@@ -89,6 +90,7 @@ export class ProfilePage implements OnInit {
 
   async updatePassword(): Promise<void> {
     const alert = await this.alertCtrl.create({
+      header: 'Ändere dein Passwort',
       inputs: [
         { name: 'newPassword', placeholder: 'Neues Passwort', type: 'password' },
         { name: 'oldPassword', placeholder: 'Altes passwort', type: 'password' }
