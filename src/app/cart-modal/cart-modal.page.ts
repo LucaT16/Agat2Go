@@ -109,9 +109,15 @@ export class CartModalPage implements OnInit {
   getTime() {
     var d = new Date().toLocaleString("en-EN", { timeZone: "Europe/Berlin" });
     var date = new Date(d)
-    var min = date.getMinutes() + 10
+    var min = date.getMinutes() 
     var hours = date.getHours()
-    this.currentTime = hours + ":" + min
+
+    if (hours < 10) {
+      this.currentTime = "0" + hours + ":" + min
+    } else {
+      this.currentTime = hours + ":" + min
+    }
+    console.log(this.currentTime)
   }
 
   setTime($event) {
