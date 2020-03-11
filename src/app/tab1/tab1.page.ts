@@ -21,6 +21,7 @@ export class Tab1Page implements OnInit, OnDestroy, OnEnter {
   badgeCount = 0;
   agataClosed = false;
   private subscription: Subscription;
+  private notstop = false;
 
 
   constructor(
@@ -66,6 +67,7 @@ export class Tab1Page implements OnInit, OnDestroy, OnEnter {
   ionViewWillEnter() {
     this.loadFavs()
     this.loadCart()
+    this.getNotstop()
   }
 
   loadFavs() {
@@ -108,8 +110,21 @@ export class Tab1Page implements OnInit, OnDestroy, OnEnter {
     }
   }
 
+  getNotstop() {
+    this.firebaseService.getNotstop()
+      .then(result => {
+        var item = result.payload.data();
+        this.notstop = item.notstop;
+        console.log(this.notstop);
+      })
+  }
+
   closedNotification() {
     this.presentAlert("Agata hat geschlossen!", "Wir haben leider schon geschlossen. Schau doch einfach nochmal morgen vorbei!", ['OK'])
+  }
+
+  closedNotstop() {
+    this.presentAlert("Agata hat geschlossen!", "Die Pilotphase ist (vorerst) beendet. Halte dich an das Agat2Go Team für weitere Infos! :)", ['OK'])
   }
 
   async presentToast(message) {
@@ -131,13 +146,20 @@ export class Tab1Page implements OnInit, OnDestroy, OnEnter {
   }
 
   async toCart() {
-    const modal = await this.modalController.create({
-      component: CartModalPage
-    });
-    modal.onDidDismiss().then(() => {
-      this.loadCart()
-    });
-    return await modal.present();
+    this.getNotstop()
+
+    if (this.notstop) {
+      this.closedNotstop()
+      return
+    } else {
+      const modal = await this.modalController.create({
+        component: CartModalPage
+      });
+      modal.onDidDismiss().then(() => {
+        this.loadCart()
+      });
+      return await modal.present();
+    }
   }
 
   async toProfile() {

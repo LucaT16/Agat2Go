@@ -47,6 +47,15 @@ export class FirebaseService {
     })
   }
 
+  getNotstop() {
+    return new Promise<any>((resolve, reject) => {
+      this.afs.collection('/notstop').doc('bMBTc9GcNx7JQ5AcwSXO').snapshotChanges()
+      .subscribe(snapshots => {
+        resolve(snapshots)
+      })
+    })
+  }
+
   getExtras(){
     return new Promise<any>((resolve, reject) => {
       this.afs.collection('/Extras').snapshotChanges()
