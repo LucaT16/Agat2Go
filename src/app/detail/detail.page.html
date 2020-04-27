@@ -23,9 +23,6 @@
                 <ion-label style="font-size: 12px">Extras</ion-label>
             </ion-list-header>
             <br>
-            <ion-label>
-                <h4>Für die Pilotphase werden keine Extras angeboten. Wir bitten um euer Verständnis.</h4>
-            </ion-label>
             <ion-item *ngFor="let item of extras" (ionSelect)="radioSelected(extras.indexOf(item))">
                 <ion-label>
                     <h2>{{item.payload.doc.data().name}}</h2>

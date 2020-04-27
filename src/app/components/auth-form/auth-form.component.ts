@@ -41,7 +41,7 @@ export class AuthFormComponent implements OnInit {
 
   submitCredentials(authForm: FormGroup): void {
     if (!authForm.valid) {
-      console.log('Form is not valid yet, current value:', authForm.value);
+      //console.log('Form is not valid yet, current value:', authForm.value);
     } else {
       this.showLoading();
       var name: string;

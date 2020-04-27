@@ -24,7 +24,7 @@ export class FirebaseService {
     this.profileService.getUserProfile().then(profile$ => {
       profile$.subscribe(userProfile => {
         this.user = userProfile;
-        console.log(userProfile)
+        //console.log(userProfile)
       });
     });
   }   

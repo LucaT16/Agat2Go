@@ -41,10 +41,10 @@ export class DetailPage implements OnInit {
       this.item = result.payload.data();
       this.totalprice = this.item.price;
     })
-    // this.firebaseService.getExtras()
-    // .then(result => {
-    //   this.extras = result;
-    // })
+    this.firebaseService.getExtras()
+    .then(result => {
+      this.extras = result;
+    })
     this.loadFavs()
   }
 

@@ -115,7 +115,7 @@ export class Tab1Page implements OnInit, OnDestroy, OnEnter {
       .then(result => {
         var item = result.payload.data();
         this.notstop = item.notstop;
-        console.log(this.notstop);
+        //console.log(this.notstop);
       })
   }
 
@@ -124,7 +124,7 @@ export class Tab1Page implements OnInit, OnDestroy, OnEnter {
   }
 
   closedNotstop() {
-    this.presentAlert("Agata hat geschlossen!", "Die Pilotphase ist (vorerst) beendet. Halte dich an das Agat2Go Team für weitere Infos! :)", ['OK'])
+    this.presentAlert("Agat2Go hat geschlossen!", "Die Pilotphase ist (vorerst) beendet. Halte dich an das Agat2Go Team für weitere Infos! :)", ['OK'])
   }
 
   async presentToast(message) {

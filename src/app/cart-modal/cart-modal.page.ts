@@ -59,7 +59,7 @@ export class CartModalPage implements OnInit {
   order() {
     this.firebaseService.createOrder(this.formattedItems, this.timestamp, this.totalprice.toFixed(2), this.toGo)
       .then(result => {
-        console.log('Bestellung wurde aufgegeben')
+        //console.log('Bestellung wurde aufgegeben')
         this.items.forEach(element => {
           this.firebaseService.deleteItemFromCart(element.payload.doc.id)
             .then(result => {
@@ -68,7 +68,7 @@ export class CartModalPage implements OnInit {
             })
         });
       }, err => {
-        console.log("Fehler beim Erstellen der Bestellung")
+        //console.log("Fehler beim Erstellen der Bestellung")
       })
     if(this.isUsingGutschein) {
       this.firebaseService.resetCoupon()
@@ -117,13 +117,13 @@ export class CartModalPage implements OnInit {
     } else {
       this.currentTime = hours + ":" + min
     }
-    console.log(this.currentTime)
+    //(this.currentTime)
   }
 
   setTime($event) {
     this.timeSet = true;
     this.timestamp = $event.detail.value;
-    console.log(this.timeSet)
+    //console.log(this.timeSet)
   }
 
   async closeModal() {

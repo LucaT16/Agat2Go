@@ -20,7 +20,7 @@ export class LoginPage implements OnInit {
     this.nativeStorage.getItem('user')
       .then(
         data => { 
-          console.log(data); 
+          //console.log(data); 
           this.firebaseService.userId = data.userId
           this.router.navigateByUrl('tabs/tab1');
         },

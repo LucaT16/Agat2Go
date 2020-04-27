@@ -76,10 +76,10 @@ export class ProfilePage implements OnInit {
             this.profileService
               .updateEmail(data.newEmail, data.password)
               .then(() => {
-                console.log('Email Changed Successfully');
+                //('Email Changed Successfully');
               })
               .catch(error => {
-                console.log('ERROR: ' + error.message);
+                //console.log('ERROR: ' + error.message);
               });
           }
         }
