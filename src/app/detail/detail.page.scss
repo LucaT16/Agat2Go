@@ -1,0 +1,84 @@
+.radio-icon {
+    visibility: visible;
+}
+
+.radio-icon:before {
+    content: "\f3a6";
+    font-family: Ionicons;
+    overflow: hidden;
+}
+
+.item-radio input:checked+.radio-content .radio-icon:before {
+    visibility: visible;
+    content: "\f3a7";
+    font-family: Ionicons;
+}
+
+.radio-icon.ion-checkmark:before {
+    content: "";
+}
+
+h2 {
+    font-weight: 100;
+    letter-spacing: 1.5px;
+    font-family: Cubano;
+    color: rgba(0, 0, 0, 0.9);
+    font-size: 14px;
+}
+
+ion-card-title {
+    text-align: center;
+    font-size: 25px;
+    letter-spacing: 2px;
+}
+
+h5 {
+    font-weight: 100;
+    letter-spacing: 1.5px;
+    font-family: Cubano;
+    color: rgba(0, 0, 0, 0.9);
+    font-size: 18px;
+}
+
+h4 {
+    font-weight: 100;
+    letter-spacing: 1.5px;
+    font-family: Cubano;
+    color: rgba(0, 0, 0, 0.5);
+    margin: 1rem;
+}
+
+ion-title {
+    font-weight: 100;
+    letter-spacing: 1.5px;
+    font-family: Cubano;
+    color: rgba(0, 0, 0, 0.9);
+}
+
+h3 {
+    font-weight: 100;
+    letter-spacing: 1.5px;
+    font-family: Cubano;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+ion-button {
+    font-weight: 100;
+    letter-spacing: 1.5px;
+    font-family: Cubano;
+    font-size: 15px;
+}
+
+.card {
+    width: 80%;
+    height: 80%;
+}
+
+ion-content {
+    font-family: Cubano;
+}
+
+ion-card {
+    font-family: Cubano;
+    letter-spacing: 1.5px;
+}

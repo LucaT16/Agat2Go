@@ -1,1 +1,37 @@
 
+   :root {
+    --ion-safe-area-top: 20px;
+    --ion-safe-area-bottom: 22px;
+  }
+  ion-col > div {
+    background-color: #f7f7f7;
+    border: solid 1px #ddd;
+    padding: 10px;
+
+  }
+
+  .nogrid
+  {
+    background-color: #ffffff;
+    border: solid 6px #ddd; 
+  }
+
+  ion-card-title{
+    text-align: center;
+    font-family: Cubano;
+  }
+
+  b {
+    font-weight: 100;
+    letter-spacing: 1.5px;
+    font-family: Cubano;
+    color: rgba(0, 0, 0, 0.9);
+  }
+
+  .center {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    height: 2em;
+    width: 2em;
+  }

@@ -1,41 +1,74 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab One
+      <img src="./assets/logo_a_trans.png" class="center">
     </ion-title>
+    <ion-buttons *ngIf="!agataClosed" (click)="toCart()" slot="primary">
+      <button ion-button icon-only id="notification-button">
+        <ion-badge id="notifications-badge" color="danger" *ngIf="badgeCount > 0">{{badgeCount}}</ion-badge>
+        <ion-icon slot="icon-only" name="cart">
+        </ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons *ngIf="agataClosed" (click)="closedNotification()" slot="primary">
+      <button ion-button icon-only disabled id="notification-button">
+        <ion-badge id="notifications-badge" color="danger" *ngIf="badgeCount > 0">{{badgeCount}}</ion-badge>
+        <ion-icon slot="icon-only" name="cart">
+        </ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons (click)="toProfile()" slot="start">
+      <ion-icon slot="icon-only" name="contact"></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-card class="welcome-card">
-      <img src="/assets/shapes.svg" alt="" />
-      <ion-card-header>
-        <ion-card-subtitle>Get Started</ion-card-subtitle>
-        <ion-card-title>Welcome to Ionic</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p>Now that your app has been created, you'll want to start building out features and components. Check out some of the resources below for next steps.</p>
-      </ion-card-content>
-    </ion-card>
-    <ion-list lines="none">
-      <ion-list-header>
-        <ion-label>Resources</ion-label>
-      </ion-list-header>
-      <ion-item href="https://ionicframework.com/docs/">
-        <ion-icon slot="start" color="medium" name="book"></ion-icon>
-        <ion-label>Ionic Documentation</ion-label>
+  <ion-list inset="true">
+    <ion-list-header style="box-shadow: 0px 2px 5px silver;">
+      <ion-label style="font-size:12px">Favoriten</ion-label>
+    </ion-list-header>
+    <br>
+    <ion-item-sliding *ngFor="let item of favs">
+      <ion-item>
+        <ion-icon slot="end" color="medium" name="add-circle-outline" (click)="addFavToCart(favs.indexOf(item))">
+        </ion-icon>
+        <ion-label>
+          <span>{{item.payload.doc.data().name}}<span *ngIf="item.payload.doc.data().extra[0]?.name">, </span>
+            <b *ngIf="item.payload.doc.data().extra[0]?.name">{{item.payload.doc.data().extra[0].name}}</b></span>
+          <h4>{{item.payload.doc.data().totalprice.toFixed(2)}} €</h4>
+        </ion-label>
       </ion-item>
-      <ion-item href="https://ionicframework.com/docs/building/scaffolding">
-        <ion-icon slot="start" color="medium" name="build"></ion-icon>
-        <ion-label>Scaffold Out Your App</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/layout/structure">
-        <ion-icon slot="start" color="medium" name="grid"></ion-icon>
-        <ion-label>Change Your App Layout</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/theming/basics">
-        <ion-icon slot="start" color="medium" name="color-fill"></ion-icon>
-        <ion-label>Theme Your App</ion-label>
-      </ion-item>
-    </ion-list>
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="removeFav(item.payload.doc.id)" icon-only>
+          <ion-icon style="width: 2em; height: 2em;" name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+    <ion-item *ngIf="favs?.length == 0">
+      <ion-label>
+        <h4>Sie haben noch keine Favoriten</h4>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="favs?.length != 0" class="space">
+    </ion-item>
+  </ion-list>
+
+  <ion-list inset="true">
+    <ion-list-header style="box-shadow: 0px 2px 5px silver;">
+      <ion-label style="font-size:12px">Produkte</ion-label>
+    </ion-list-header>
+    <br>
+    <ion-item *ngFor="let item of items" [routerLink]="'/detail/' + item.payload.doc.id">
+      <ion-avatar style="size: 120%" slot="start">
+        <img src="./assets/{{item.payload.doc.data().name}}.jpg">
+      </ion-avatar>
+      <ion-label>
+        <br>
+        <h2>{{item.payload.doc.data().name}}</h2>
+        <h4>{{item.payload.doc.data().price.toFixed(2)}} €</h4>
+        <br>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

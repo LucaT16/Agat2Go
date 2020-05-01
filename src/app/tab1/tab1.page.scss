@@ -1,4 +1,75 @@
+
 .welcome-card img {
-  max-height: 35vh;
+  max-height: 25vh;
   overflow: hidden;
+  
+}
+ion-avatar { 
+  width: 60px;  
+  height: 60px;
+}
+
+span { font-size: 17px;}
+span b { 
+  font-size: 60%;
+  font-weight: inherit; 
+}
+button {
+
+  background-color: transparent;
+	ion-badge {
+		position: absolute;
+		top: -0.1rem;
+		right: -0.2rem;
+    opacity: 1;
+    z-index: 1;
+
+		& ~ ion-icon {
+      margin-right: 0.4rem;
+      z-index: -1;
+		}
+	}
+}
+
+ion-buttons {
+  color: clear;
+  background-color: clear;
+}
+
+ion-content{
+  font-family: Cubano;
+}
+
+b, ion-title{
+  font-weight: 100;
+  letter-spacing: 1.5px;
+  font-family: Cubano;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+h2 ,span{
+  font-weight: 100;
+  letter-spacing: 1.5px;
+  font-family: Cubano;
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 14px;
+}
+
+h4{
+  font-weight: 100;
+  letter-spacing: 1.5px;
+  font-family: Cubano;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+
+ion-item-divider{
+  font-weight: 100;
+  letter-spacing: 1.5px;
+  font-family: Cubano;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.space{
+  max-height: 10px;
 }

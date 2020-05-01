@@ -1,1 +1,35 @@
+h2{
+    font-family: Cubano;
+    font-size: 23px!important;
+    line-height: 1.5em!important;
+    letter-spacing: 1px!important;
+    color: #3d4246!important;
+    text-align: center;
+}
+h1{
+    font-family: Cubano;
+    font-size: 27px!important;
+    line-height: 1.5em!important;
+    letter-spacing: 1px!important;
+    color: #3d4246!important;
+    text-align: center;
+}
 
+p{
+    font-size: 15px;
+    font-family: "Work Sans",sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    color: #3d4246;
+    line-height: 1.6;
+    text-align: center;
+}
+
+
+.center {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    height: 2em;
+    width: 2em;
+  }
