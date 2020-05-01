@@ -1,0 +1,36 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "io.lucatallarita.agat2go"
+    },
+    "cordova-plugin-ionic-keyboard": {
+      "PACKAGE_NAME": "io.lucatallarita.agat2go"
+    },
+    "cordova-plugin-ionic-webview": {
+      "PACKAGE_NAME": "io.lucatallarita.agat2go"
+    },
+    "cordova-plugin-nativestorage": {
+      "PACKAGE_NAME": "io.lucatallarita.agat2go"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "io.lucatallarita.agat2go"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "io.lucatallarita.agat2go"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "io.lucatallarita.agat2go"
+    },
+    "cordova-plugin-secure-storage": {
+      "PACKAGE_NAME": "io.lucatallarita.agat2go"
+    }
+  },
+  "dependent_plugins": {}
+}
